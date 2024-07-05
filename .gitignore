@@ -10,4 +10,5 @@
 *.ff08bcc
 *.user
 *.qmake
-
+*.qtc_clangd
+*.idx
