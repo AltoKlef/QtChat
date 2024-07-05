@@ -13,3 +13,4 @@
 *.qtc_clangd
 *.idx
 /server/build
+/server/build/Right-Debug
