@@ -1,6 +1,6 @@
 *.user
-/client/build
-/server/build
+/client/build*
+/server/build*
 *.user
 *.1e19004
 *.user
