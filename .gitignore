@@ -20,3 +20,5 @@ client/build/Right-Debug/.qtc_clangd/.cache/clangd/index/mainwindow.cpp.70B43358
 client/build/Right-Debug/.qtc_clangd/.cache/clangd/index/mainwindow.h.5A5F47180EADD25A.idx
 server/build/Right-Debug/.qtc_clangd/.cache/clangd/index/server.cpp.D6CA4E6DD6B8DCDC.idx
 server/build/Right-Debug/.qtc_clangd/.cache/clangd/index/server.h.E738C383C375F571.idx
+server/build/Right-Debug/server
+server/build/Right-Debug/server.o
