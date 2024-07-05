@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++1y -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../../../client -I. -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtWidgets -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtCore -I. -I. -I/usr/local/Qt-5.15.2/mkspecs/linux-g++
+INCPATH       = -I../../../client -I. -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtWidgets -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I. -I/usr/local/Qt-5.15.2/mkspecs/linux-g++
 QMAKE         = /usr/local/Qt-5.15.2/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = client1.0.0
 DISTDIR = /home/alto/QtProjects/QtChat/client/build/Right-Debug/.tmp/client1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/usr/local/Qt-5.15.2/lib
-LIBS          = $(SUBLIBS) /usr/local/Qt-5.15.2/lib/libQt5Widgets.so /usr/local/Qt-5.15.2/lib/libQt5Gui.so /usr/local/Qt-5.15.2/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) /usr/local/Qt-5.15.2/lib/libQt5Widgets.so /usr/local/Qt-5.15.2/lib/libQt5Gui.so /usr/local/Qt-5.15.2/lib/libQt5Network.so /usr/local/Qt-5.15.2/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -231,6 +231,7 @@ DIST          = /usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf \
 		/usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf \
 		/usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf \
+		../../.qmake.stash \
 		/usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf \
@@ -438,6 +439,7 @@ Makefile: ../../client.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 		/usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf \
 		/usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf \
 		/usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf \
@@ -634,6 +636,7 @@ Makefile: ../../client.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 /usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf:
 /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf:
 /usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf:
@@ -814,9 +817,14 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtouchdevice.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtabwidget.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qicon.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpSocket \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpsocket.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetworkglobal.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetwork-config.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qabstractsocket.h \
 		moc_predefs.h \
 		/usr/local/Qt-5.15.2/bin/moc
-	/usr/local/Qt-5.15.2/bin/moc $(DEFINES) --include /home/alto/QtProjects/QtChat/client/build/Right-Debug/moc_predefs.h -I/usr/local/Qt-5.15.2/mkspecs/linux-g++ -I/home/alto/QtProjects/QtChat/client -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtWidgets -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
+	/usr/local/Qt-5.15.2/bin/moc $(DEFINES) --include /home/alto/QtProjects/QtChat/client/build/Right-Debug/moc_predefs.h -I/usr/local/Qt-5.15.2/mkspecs/linux-g++ -I/home/alto/QtProjects/QtChat/client -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtWidgets -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -946,6 +954,11 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtouchdevice.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtabwidget.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qicon.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpSocket \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpsocket.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetworkglobal.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetwork-config.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qabstractsocket.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QApplication \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qapplication.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qcoreapplication.h \
@@ -1062,7 +1075,28 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtouchdevice.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtabwidget.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qicon.h \
-		ui_mainwindow.h
+		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpSocket \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpsocket.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetworkglobal.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetwork-config.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qabstractsocket.h \
+		ui_mainwindow.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QVariant \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QApplication \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qapplication.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcoreapplication.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qeventloop.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qdesktopwidget.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qguiapplication.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qinputmethod.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QMenuBar \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qmenubar.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qmenu.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qaction.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qactiongroup.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QStatusBar \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qstatusbar.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 

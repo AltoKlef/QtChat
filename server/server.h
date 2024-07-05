@@ -18,6 +18,7 @@ private:
 public slots:
     void incomingConnection(qintptr socketDescription);
     void slotReadyRead();
+    void slotClientDisconnected();
 };
 
 #endif // SERVER_H

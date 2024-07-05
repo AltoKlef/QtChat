@@ -12,15 +12,15 @@ Server::Server() {
 }
 
 void Server::incomingConnection(qintptr socketDescriptor) {
-    QTcpSocket *clientSocket = new QTcpSocket;
-    if (clientSocket->setSocketDescriptor(socketDescriptor)) {
-        connect(clientSocket, &QTcpSocket::readyRead, this, &Server::slotReadyRead);
-        connect(clientSocket, &QTcpSocket::disconnected, clientSocket, &QTcpSocket::deleteLater);
+    QTcpSocket *socket = new QTcpSocket;
+    if (socket->setSocketDescriptor(socketDescriptor)) {
+        connect(socket, &QTcpSocket::readyRead, this, &Server::slotReadyRead);
+        connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
 
-        Sockets.push_back(clientSocket);
+        Sockets.push_back(socket);
         qDebug() << "Client connected:" << socketDescriptor;
     } else {
-        delete clientSocket;
+        delete socket;
         qDebug() << "Error in incomingConnection";
     }
 }
@@ -39,6 +39,7 @@ void Server::slotReadyRead() {
         QString str;
         in >> str;
         qDebug()<<str;
+        SendToClient(str);
     }
     else{
         qDebug()<<"DataStream error";
@@ -49,6 +50,14 @@ void Server::SendToClient(QString str){
     QDataStream out(&Data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_15);
     out<<str;
-    socket->write(Data);
-
+    //socket->write(Data);
+    for(int i=0;i<Sockets.size();i++){
+        Sockets[i]->write(Data);
+    }
+}
+void Server::slotClientDisconnected()
+{
+    socket = (QTcpSocket*)sender();
+    Sockets.erase(std::remove(Sockets.begin(), Sockets.end(), socket), Sockets.end());
+    socket->deleteLater();
 }

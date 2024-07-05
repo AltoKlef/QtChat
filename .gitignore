@@ -14,3 +14,4 @@
 *.idx
 /server/build
 /server/build/Right-Debug
+/client/build
