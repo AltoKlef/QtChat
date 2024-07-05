@@ -1,5 +1,4 @@
-QT = core
-QT+=network
+QT += core network
 CONFIG += c++14 cmdline
 
 # You can make your code fail to compile if it uses deprecated APIs.

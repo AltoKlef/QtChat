@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++1y -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../../../server -I. -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/local/Qt-5.15.2/mkspecs/linux-g++
+INCPATH       = -I../../../server -I. -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/local/Qt-5.15.2/mkspecs/linux-g++
 QMAKE         = /usr/local/Qt-5.15.2/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = server1.0.0
 DISTDIR = /home/alto/QtProjects/QtChat/server/build/Right-Debug/.tmp/server1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/usr/local/Qt-5.15.2/lib
-LIBS          = $(SUBLIBS) /usr/local/Qt-5.15.2/lib/libQt5Network.so /usr/local/Qt-5.15.2/lib/libQt5Core.so -lpthread   
+LIBS          = $(SUBLIBS) /usr/local/Qt-5.15.2/lib/libQt5Gui.so /usr/local/Qt-5.15.2/lib/libQt5Network.so /usr/local/Qt-5.15.2/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -53,9 +53,10 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../main.cpp \
-		../../server.cpp 
+		../../server.cpp moc_server.cpp
 OBJECTS       = main.o \
-		server.o
+		server.o \
+		moc_server.o
 DIST          = /usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.15.2/mkspecs/common/unix.conf \
 		/usr/local/Qt-5.15.2/mkspecs/common/linux.conf \
@@ -230,6 +231,7 @@ DIST          = /usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf \
 		/usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf \
 		/usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf \
+		../../.qmake.stash \
 		/usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf \
@@ -242,6 +244,7 @@ DIST          = /usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/resources_functions.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/resources.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/moc.prf \
+		/usr/local/Qt-5.15.2/mkspecs/features/unix/opengl.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/unix/thread.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/qmake_use.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/file_copies.prf \
@@ -436,6 +439,7 @@ Makefile: ../../server.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 		/usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf \
 		/usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf \
 		/usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf \
@@ -448,6 +452,7 @@ Makefile: ../../server.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 		/usr/local/Qt-5.15.2/mkspecs/features/resources_functions.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/resources.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/moc.prf \
+		/usr/local/Qt-5.15.2/mkspecs/features/unix/opengl.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/unix/thread.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/qmake_use.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/file_copies.prf \
@@ -631,6 +636,7 @@ Makefile: ../../server.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 /usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf:
 /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf:
 /usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf:
@@ -643,6 +649,7 @@ Makefile: ../../server.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 /usr/local/Qt-5.15.2/mkspecs/features/resources_functions.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/resources.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/moc.prf:
+/usr/local/Qt-5.15.2/mkspecs/features/unix/opengl.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/unix/thread.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/qmake_use.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/file_copies.prf:
@@ -699,8 +706,87 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/local/Qt-5.15.2/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1y -Wall -Wextra -dM -E -o moc_predefs.h /usr/local/Qt-5.15.2/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_server.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_server.cpp
+moc_server.cpp: ../../server.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpServer \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpserver.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetworkglobal.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qglobal.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qconfig-bootstrapped.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qconfig.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtcore-config.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsystemdetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qprocessordetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcompilerdetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtypeinfo.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsysinfo.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlogging.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qflags.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbasicatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_bootstrap.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qgenericatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_cxx11.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_msvc.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qglobalstatic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmutex.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qnumeric.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qversiontagging.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetwork-config.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobject.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobjectdefs.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qnamespace.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobjectdefs_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstring.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qchar.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbytearray.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qrefcount.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qarraydata.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringliteral.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringalgorithms.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringview.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringbuilder.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qalgorithms.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qiterator.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qhashfunctions.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qpair.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvector.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontainertools_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qpoint.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbytearraylist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringlist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qregexp.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringmatcher.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcoreevent.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qscopedpointer.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmetatype.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvarlengtharray.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontainerfwd.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobject_impl.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qabstractsocket.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qiodevice.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qdebug.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qhash.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmap.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtextstream.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlocale.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvariant.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qshareddata.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qset.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontiguouscache.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsharedpointer.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsharedpointer_impl.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qhostaddress.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpSocket \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpsocket.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QVector \
+		moc_predefs.h \
+		/usr/local/Qt-5.15.2/bin/moc
+	/usr/local/Qt-5.15.2/bin/moc $(DEFINES) --include /home/alto/QtProjects/QtChat/server/build/Right-Debug/moc_predefs.h -I/usr/local/Qt-5.15.2/mkspecs/linux-g++ -I/home/alto/QtProjects/QtChat/server -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../server.h -o moc_server.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -711,7 +797,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -769,11 +855,112 @@ main.o: ../../main.cpp /usr/local/Qt-5.15.2/include/QtCore/QCoreApplication \
 		/usr/local/Qt-5.15.2/include/QtCore/qvarlengtharray.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qcontainerfwd.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qobject_impl.h \
-		/usr/local/Qt-5.15.2/include/QtCore/qeventloop.h
+		/usr/local/Qt-5.15.2/include/QtCore/qeventloop.h \
+		../../server.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpServer \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpserver.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetworkglobal.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetwork-config.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qabstractsocket.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qiodevice.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qdebug.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qhash.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmap.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtextstream.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlocale.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvariant.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qshareddata.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qset.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontiguouscache.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsharedpointer.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsharedpointer_impl.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qhostaddress.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpSocket \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpsocket.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QVector
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
-server.o: ../../server.cpp 
+server.o: ../../server.cpp ../../server.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpServer \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpserver.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetworkglobal.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qglobal.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qconfig-bootstrapped.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qconfig.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtcore-config.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsystemdetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qprocessordetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcompilerdetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtypeinfo.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsysinfo.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlogging.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qflags.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbasicatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_bootstrap.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qgenericatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_cxx11.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_msvc.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qglobalstatic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmutex.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qnumeric.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qversiontagging.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtnetwork-config.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobject.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobjectdefs.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qnamespace.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobjectdefs_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstring.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qchar.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbytearray.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qrefcount.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qarraydata.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringliteral.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringalgorithms.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringview.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringbuilder.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qalgorithms.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qiterator.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qhashfunctions.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qpair.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvector.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontainertools_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qpoint.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbytearraylist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringlist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qregexp.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringmatcher.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcoreevent.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qscopedpointer.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmetatype.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvarlengtharray.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontainerfwd.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobject_impl.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qabstractsocket.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qiodevice.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qdebug.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qhash.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmap.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtextstream.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlocale.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvariant.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qshareddata.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qset.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontiguouscache.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsharedpointer.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsharedpointer_impl.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qhostaddress.h \
+		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpSocket \
+		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpsocket.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QVector \
+		/usr/local/Qt-5.15.2/include/QtCore/QDebug \
+		/usr/local/Qt-5.15.2/include/QtCore/QDataStream \
+		/usr/local/Qt-5.15.2/include/QtCore/qdatastream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o server.o ../../server.cpp
+
+moc_server.o: moc_server.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_server.o moc_server.cpp
 
 ####### Install
 

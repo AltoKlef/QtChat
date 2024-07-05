@@ -2,8 +2,22 @@
 #define SERVER_H
 #include <QTcpServer>
 #include <QTcpSocket>
-class Server: public QTcpServer{
+#include <QVector>
+class Server: public QTcpServer
+{
+    Q_OBJECT
 
+public:
+    Server();
+    QTcpSocket *socket;
+private:
+    QVector <QTcpSocket*> Sockets;
+    QByteArray Data;
+    void SendToClient(QString str);
+
+public slots:
+    void incomingConnection(qintptr socketDescription);
+    void slotReadyRead();
 };
 
 #endif // SERVER_H
