@@ -1,3 +1,11 @@
 *.user
-./client/build
-./server/build
+/client/build
+/server/build
+*.user
+*.1e19004
+*.user
+*.141cce0
+*.ff08bcc
+*.user
+*.qmake
+
