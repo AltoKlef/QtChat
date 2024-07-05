@@ -9,6 +9,7 @@ Server::Server() {
     } else {
         qDebug() << "Server start error";
     }
+    nextBlockSize=0;
 }
 
 void Server::incomingConnection(qintptr socketDescriptor) {
@@ -34,25 +35,37 @@ void Server::slotReadyRead() {
 
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_5_15);
-    if(in.status()==QDataStream::Ok){
-        qDebug() <<"read..";
-        QString str;
-        in >> str;
-        qDebug()<<str;
-        SendToClient(str);
+
+    in.startTransaction(); // Начинаем транзакцию
+
+    QString str;
+    QTime time;
+
+    // Читаем данные из потока
+    in >> time >> str;
+
+    // Проверяем, успешно ли завершилась транзакция
+    if (!in.commitTransaction()) {
+        qDebug() << "Data not fully available yet";
+        return;
     }
-    else{
-        qDebug()<<"DataStream error";
-    }
+
+    qDebug() << "Received:" << str;
+
+    // Отправляем полученные данные обратно всем клиентам
+    SendToClient(str);
 }
-void Server::SendToClient(QString str){
+
+void Server::SendToClient(QString str) {
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_15);
-    out<<str;
-    //socket->write(Data);
-    for(int i=0;i<Sockets.size();i++){
-        Sockets[i]->write(Data);
+    out << quint16(0) << QTime::currentTime() << str;
+    out.device()->seek(0);
+    out << quint16(Data.size() - sizeof(quint16));
+
+    for (QTcpSocket *socket : Sockets) {
+        socket->write(Data);
     }
 }
 void Server::slotClientDisconnected()
