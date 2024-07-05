@@ -12,3 +12,4 @@
 *.qmake
 *.qtc_clangd
 *.idx
+/server/build
