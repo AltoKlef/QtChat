@@ -1,6 +1,8 @@
 *.user
 /client/build*
 /server/build*
+/client/build/Right-Debug*
+/server/build/Right-Debug*
 *.user
 *.1e19004
 *.user
