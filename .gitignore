@@ -22,3 +22,10 @@ server/build/Right-Debug/.qtc_clangd/.cache/clangd/index/server.cpp.D6CA4E6DD6B8
 server/build/Right-Debug/.qtc_clangd/.cache/clangd/index/server.h.E738C383C375F571.idx
 server/build/Right-Debug/server
 server/build/Right-Debug/server.o
+/client/build
+client/build/Right-Debug/mainwindow.o
+client/client.pro.user
+server/build/Right-Debug/.qtc_clangd/.cache/clangd/index/server.cpp.D6CA4E6DD6B8DCDC.idx
+server/build/Right-Debug/server
+server/build/Right-Debug/server.o
+server/server.pro.user

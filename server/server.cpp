@@ -35,38 +35,40 @@ void Server::slotReadyRead() {
 
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_5_15);
-    if(in.status()==QDataStream::Ok){
-        /* qDebug() <<"read..";
-        QString str;
-        in >> str;
-        qDebug()<<str;
-        SendToClient(str);*/
-        for(;;){
-            if(nextBlockSize==0){
+    QString str;
+    while (true) {
+        in.startTransaction();
+
+        if (nextBlockSize == 0) {
+            if (socket->bytesAvailable() < sizeof(quint16)) {
                 qDebug()<<"nextBlockSize=0";
-                if(socket->bytesAvailable()<2){
-                    qDebug()<<"Data < 2, break";
-                    break;
-                }
-                in >>nextBlockSize;
-                qDebug()<<"nextBlockSize = " << nextBlockSize;
-            }
-            if(socket->bytesAvailable()<nextBlockSize)  {
-                qDebug()<<"Data not full";
+                in.rollbackTransaction();
                 break;
             }
-            QString str;
-            QTime time;
-            in>>time>>str;
-            nextBlockSize =0;
-            qDebug()<<str;
-            SendToClient(str);
+
+            in >> nextBlockSize;
+            qDebug()<<"nextBlockSize = " << nextBlockSize;
+        }
+
+        if (socket->bytesAvailable() < nextBlockSize) {
+            qDebug()<<"Data not full";
+            in.rollbackTransaction();
             break;
         }
 
-    }
-    else{
-        qDebug()<<"DataStream error";
+
+        in >>str;
+
+        if (!in.commitTransaction()) {
+            qDebug() << "Data not fully available yet";
+            break;
+        }
+
+        nextBlockSize = 0;
+        QString message = str;
+        qDebug() << message;
+        SendToClient(message);
+        break;
     }
 }
 void Server::SendToClient(QString str){
@@ -80,6 +82,7 @@ void Server::SendToClient(QString str){
     for(int i=0;i<Sockets.size();i++){
         Sockets[i]->write(Data);
     }
+    qDebug()<<"Sending commit";
 }
 void Server::slotClientDisconnected()
 {

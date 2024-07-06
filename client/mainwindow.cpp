@@ -26,55 +26,66 @@ void MainWindow::slotReadyRead()
 {
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_5_15);
-    if(in.status()==QDataStream::Ok){
-        /*QString str;
-        in>>str;
-        ui->textBrowser->append(str);*/
-        for(;;){
-            if(nextBlockSize==0){
-                if(socket->bytesAvailable()<2){
-                    break;
-                }
-                in >>nextBlockSize;
-            }
-            if(socket->bytesAvailable()<nextBlockSize)  {
+    QString str;
+    QTime time;
+
+    while (true) {
+        in.startTransaction();
+        if (nextBlockSize == 0) {
+            if (socket->bytesAvailable() < sizeof(quint16)) {
+                qDebug()<<"nextBlockSize=0";
+                in.rollbackTransaction();
                 break;
             }
-            QString str;
-            QTime time;
-            in>>time>>str;
-            nextBlockSize =0;
-            ui->textBrowser->append(time.toString()+ " " +str);
+
+            in >> nextBlockSize;
+            qDebug()<<"nextBlockSize = " << nextBlockSize;
         }
-    }
-    else{
-        ui->textBrowser->append("read error");
-    }
 
+        if (socket->bytesAvailable() < nextBlockSize) {
+            qDebug()<<"Data not full";
+            in.rollbackTransaction();
+            break;
+        }
+        in >> time >> str;
+
+        if (!in.commitTransaction()) {
+            qDebug() << "Data not fully available yet";
+            break;
+        }
+        nextBlockSize = 0;
+        ui->textBrowser->append(time.toString() + ": " + str);
+        break;
+    }
 }
-
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    if(ui->lineEdit->text()==""){
+        return;
+    }
     SendToServer(ui->lineEdit->text());
 }
 
 void MainWindow::SendToServer(QString str)
 {
+    qDebug()<<str;
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_15);
-    out<<quint16(0)<<QTime::currentTime()<<str;
+    out << quint16(0) << str;
     out.device()->seek(0);
-    out<<quint16(Data.size() - sizeof(quint16));
+    out << quint16(Data.size() - sizeof(quint16));
     socket->write(Data);
     ui->lineEdit->clear();
-
 }
 
 
 void MainWindow::on_lineEdit_returnPressed()
 {
+    if(ui->lineEdit->text()==""){
+        return;
+    }
     SendToServer(ui->lineEdit->text());
 }
 
