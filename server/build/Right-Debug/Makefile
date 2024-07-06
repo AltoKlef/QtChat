@@ -231,7 +231,6 @@ DIST          = /usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf \
 		/usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf \
 		/usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf \
-		../../.qmake.stash \
 		/usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf \
@@ -439,7 +438,6 @@ Makefile: ../../server.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 		/usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf \
 		/usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf \
 		/usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf \
@@ -636,7 +634,6 @@ Makefile: ../../server.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 /usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf:
 /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf:
 /usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf:
@@ -783,6 +780,8 @@ moc_server.cpp: ../../server.h \
 		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpSocket \
 		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpsocket.h \
 		/usr/local/Qt-5.15.2/include/QtCore/QVector \
+		/usr/local/Qt-5.15.2/include/QtCore/QTime \
+		/usr/local/Qt-5.15.2/include/QtCore/qdatetime.h \
 		moc_predefs.h \
 		/usr/local/Qt-5.15.2/bin/moc
 	/usr/local/Qt-5.15.2/bin/moc $(DEFINES) --include /home/alto/QtProjects/QtChat/server/build/Right-Debug/moc_predefs.h -I/usr/local/Qt-5.15.2/mkspecs/linux-g++ -I/home/alto/QtProjects/QtChat/server -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../server.h -o moc_server.cpp
@@ -877,7 +876,9 @@ main.o: ../../main.cpp /usr/local/Qt-5.15.2/include/QtCore/QCoreApplication \
 		/usr/local/Qt-5.15.2/include/QtNetwork/qhostaddress.h \
 		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpSocket \
 		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpsocket.h \
-		/usr/local/Qt-5.15.2/include/QtCore/QVector
+		/usr/local/Qt-5.15.2/include/QtCore/QVector \
+		/usr/local/Qt-5.15.2/include/QtCore/QTime \
+		/usr/local/Qt-5.15.2/include/QtCore/qdatetime.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 server.o: ../../server.cpp ../../server.h \
@@ -954,6 +955,8 @@ server.o: ../../server.cpp ../../server.h \
 		/usr/local/Qt-5.15.2/include/QtNetwork/QTcpSocket \
 		/usr/local/Qt-5.15.2/include/QtNetwork/qtcpsocket.h \
 		/usr/local/Qt-5.15.2/include/QtCore/QVector \
+		/usr/local/Qt-5.15.2/include/QtCore/QTime \
+		/usr/local/Qt-5.15.2/include/QtCore/qdatetime.h \
 		/usr/local/Qt-5.15.2/include/QtCore/QDebug \
 		/usr/local/Qt-5.15.2/include/QtCore/QDataStream \
 		/usr/local/Qt-5.15.2/include/QtCore/qdatastream.h

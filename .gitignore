@@ -36,3 +36,10 @@ client/build/Right-Debug/client
 /client/build
 /client/build
 client/build/Right-Debug/Makefile
+*.idx
+/client/build/Right-Debug/.qtc_clangd/.cache/clangd/index
+/client/build/Right-Debug/.qtc_clangd/.cache/clangd
+/client/build/Right-Debug/.qtc_clangd/.cache
+/client/build/Right-Debug/.qtc_clangd
+/client/build/Right-Debug
+/client/build

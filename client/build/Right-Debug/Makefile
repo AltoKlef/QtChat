@@ -52,14 +52,14 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../../dialog.cpp \
+SOURCES       = ../../auth_window.cpp \
 		../../main.cpp \
-		../../mainwindow.cpp moc_dialog.cpp \
+		../../mainwindow.cpp moc_auth_window.cpp \
 		moc_mainwindow.cpp
-OBJECTS       = dialog.o \
+OBJECTS       = auth_window.o \
 		main.o \
 		mainwindow.o \
-		moc_dialog.o \
+		moc_auth_window.o \
 		moc_mainwindow.o
 DIST          = /usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.15.2/mkspecs/common/unix.conf \
@@ -235,7 +235,6 @@ DIST          = /usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf \
 		/usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf \
 		/usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf \
-		../../.qmake.stash \
 		/usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf \
@@ -256,8 +255,8 @@ DIST          = /usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/exceptions.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/yacc.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/lex.prf \
-		../../../../client.pro ../../dialog.h \
-		../../mainwindow.h ../../dialog.cpp \
+		../../../../client.pro ../../auth_window.h \
+		../../mainwindow.h ../../auth_window.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp
 QMAKE_TARGET  = client
@@ -268,7 +267,7 @@ TARGET        = client
 first: all
 ####### Build rules
 
-client: ui_dialog.h ui_mainwindow.h $(OBJECTS)  
+client: ui_auth_window.h ui_mainwindow.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../../client.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
@@ -445,7 +444,6 @@ Makefile: ../../client.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 		/usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf \
 		/usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf \
 		/usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf \
@@ -642,7 +640,6 @@ Makefile: ../../client.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 /usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf:
 /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf:
 /usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf:
@@ -679,9 +676,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/Qt-5.15.2/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../dialog.h ../../mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../dialog.cpp ../../main.cpp ../../mainwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../dialog.ui ../../mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../../auth_window.h ../../mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../auth_window.cpp ../../main.cpp ../../mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../auth_window.ui ../../mainwindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -713,10 +710,10 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/local/Qt-5.15.2/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1y -Wall -Wextra -dM -E -o moc_predefs.h /usr/local/Qt-5.15.2/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_dialog.cpp moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_auth_window.cpp moc_mainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_dialog.cpp moc_mainwindow.cpp
-moc_dialog.cpp: ../../dialog.h \
+	-$(DEL_FILE) moc_auth_window.cpp moc_mainwindow.cpp
+moc_auth_window.cpp: ../../auth_window.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QDialog \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtwidgetsglobal.h \
@@ -823,7 +820,7 @@ moc_dialog.cpp: ../../dialog.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtouchdevice.h \
 		moc_predefs.h \
 		/usr/local/Qt-5.15.2/bin/moc
-	/usr/local/Qt-5.15.2/bin/moc $(DEFINES) --include /home/alto/QtProjects/QtChat/client/build/Right-Debug/moc_predefs.h -I/usr/local/Qt-5.15.2/mkspecs/linux-g++ -I/home/alto/QtProjects/QtChat/client -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtWidgets -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../dialog.h -o moc_dialog.cpp
+	/usr/local/Qt-5.15.2/bin/moc $(DEFINES) --include /home/alto/QtProjects/QtChat/client/build/Right-Debug/moc_predefs.h -I/usr/local/Qt-5.15.2/mkspecs/linux-g++ -I/home/alto/QtProjects/QtChat/client -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtWidgets -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../auth_window.h -o moc_auth_window.cpp
 
 moc_mainwindow.cpp: ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMainWindow \
@@ -939,6 +936,9 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtNetwork/qabstractsocket.h \
 		/usr/local/Qt-5.15.2/include/QtCore/QTime \
 		/usr/local/Qt-5.15.2/include/QtCore/qdatetime.h \
+		../../auth_window.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QDialog \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
 		moc_predefs.h \
 		/usr/local/Qt-5.15.2/bin/moc
 	/usr/local/Qt-5.15.2/bin/moc $(DEFINES) --include /home/alto/QtProjects/QtChat/client/build/Right-Debug/moc_predefs.h -I/usr/local/Qt-5.15.2/mkspecs/linux-g++ -I/home/alto/QtProjects/QtChat/client -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtWidgets -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
@@ -947,12 +947,12 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_dialog.h ui_mainwindow.h
+compiler_uic_make_all: ui_auth_window.h ui_mainwindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_dialog.h ui_mainwindow.h
-ui_dialog.h: ../../dialog.ui \
+	-$(DEL_FILE) ui_auth_window.h ui_mainwindow.h
+ui_auth_window.h: ../../auth_window.ui \
 		/usr/local/Qt-5.15.2/bin/uic
-	/usr/local/Qt-5.15.2/bin/uic ../../dialog.ui -o ui_dialog.h
+	/usr/local/Qt-5.15.2/bin/uic ../../auth_window.ui -o ui_auth_window.h
 
 ui_mainwindow.h: ../../mainwindow.ui \
 		/usr/local/Qt-5.15.2/bin/uic
@@ -968,7 +968,7 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-dialog.o: ../../dialog.cpp ../../dialog.h \
+auth_window.o: ../../auth_window.cpp ../../auth_window.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QDialog \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtwidgetsglobal.h \
@@ -1073,8 +1073,8 @@ dialog.o: ../../dialog.cpp ../../dialog.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qfiledevice.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qvector2d.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtouchdevice.h \
-		ui_dialog.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialog.o ../../dialog.cpp
+		ui_auth_window.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o auth_window.o ../../auth_window.cpp
 
 main.o: ../../main.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMainWindow \
@@ -1190,6 +1190,9 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtNetwork/qabstractsocket.h \
 		/usr/local/Qt-5.15.2/include/QtCore/QTime \
 		/usr/local/Qt-5.15.2/include/QtCore/qdatetime.h \
+		../../auth_window.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QDialog \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QApplication \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qapplication.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qcoreapplication.h \
@@ -1313,52 +1316,14 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtNetwork/qabstractsocket.h \
 		/usr/local/Qt-5.15.2/include/QtCore/QTime \
 		/usr/local/Qt-5.15.2/include/QtCore/qdatetime.h \
-<<<<<<< Updated upstream
+		../../auth_window.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QDialog \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
-=======
->>>>>>> Stashed changes
-		ui_mainwindow.h \
-		/usr/local/Qt-5.15.2/include/QtCore/QVariant \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QApplication \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qapplication.h \
-		/usr/local/Qt-5.15.2/include/QtCore/qcoreapplication.h \
-		/usr/local/Qt-5.15.2/include/QtCore/qeventloop.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qdesktopwidget.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qguiapplication.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qinputmethod.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextcursor.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextformat.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qpen.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QMenuBar \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qmenubar.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qmenu.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qaction.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qactiongroup.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QPushButton \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qpushbutton.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractbutton.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QStatusBar \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qstatusbar.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QTextBrowser \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qtextbrowser.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
-<<<<<<< Updated upstream
-		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
-		../../dialog.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QDialog
-=======
-		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget
->>>>>>> Stashed changes
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 
-moc_dialog.o: moc_dialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dialog.o moc_dialog.cpp
+moc_auth_window.o: moc_auth_window.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_auth_window.o moc_auth_window.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
