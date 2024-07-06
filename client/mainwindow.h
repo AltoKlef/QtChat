@@ -29,11 +29,12 @@ private:
     QString username,password;
     QTcpSocket *socket;
     QByteArray Data;
-    void SendToServer(QString str);
     quint16 nextBlockSize;
     void authorizeUser();
     void connectToServer();
 
+    void SendToServer(const QString &command, const QString &data);
+    void processResponse(const QString &command, const QString &data);
 public slots:
     void slotReadyRead();
 };

@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
     connect(&auth, &auth_window::authClicked, this, &MainWindow::authorizeUser);
     nextBlockSize=0;
+    connectToServer();
     //authorizeUser();
 }
 
@@ -25,63 +26,67 @@ void MainWindow::display()
     auth.show();
 }
 
-void MainWindow::slotReadyRead()
-{
+void MainWindow::slotReadyRead() {
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_5_15);
-    QString str;
-    QTime time;
+    QString command;
+    QString data;
 
     while (true) {
         in.startTransaction();
+
         if (nextBlockSize == 0) {
             if (socket->bytesAvailable() < sizeof(quint16)) {
-                qDebug()<<"nextBlockSize=0";
                 in.rollbackTransaction();
                 break;
             }
 
             in >> nextBlockSize;
-            qDebug()<<"nextBlockSize = " << nextBlockSize;
         }
 
         if (socket->bytesAvailable() < nextBlockSize) {
-            qDebug()<<"Data not full";
             in.rollbackTransaction();
             break;
         }
-        in >> time >> str;
+
+        in >> command >> data;
 
         if (!in.commitTransaction()) {
             qDebug() << "Data not fully available yet";
             break;
         }
+
         nextBlockSize = 0;
-        ui->textBrowser->append(time.toString() + ": " + str);
+        processResponse(command, data);
         break;
     }
 }
 
-void MainWindow::on_pushButton_2_clicked()
-{
-    if(ui->lineEdit->text()==""){
-        return;
+void MainWindow::processResponse(const QString &command, const QString &data) {
+    if (command == "AUTH_SUCCESS") {
+        auth.hide();
+        MainWindow::show();
+        ui->textBrowser->append(data);
+
+    } else if (command == "AUTH_FAIL") {
+        ui->textBrowser->append(data);
+    } else if (command == "MESSAGE") {
+        ui->textBrowser->append(data);
+    } else {
+        qDebug() << "Unknown command";
     }
-    SendToServer(ui->lineEdit->text());
 }
 
-void MainWindow::SendToServer(QString str)
-{
-    qDebug()<<str;
-    Data.clear();
-    QDataStream out(&Data, QIODevice::WriteOnly);
+void MainWindow::SendToServer(const QString &command, const QString &data) {
+    QByteArray packet;
+    QDataStream out(&packet, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_15);
-    out << quint16(0) << username<<str;
+    out << quint16(0) << command << data;
     out.device()->seek(0);
-    out << quint16(Data.size() - sizeof(quint16));
-    socket->write(Data);
-    ui->lineEdit->clear();
+    out << quint16(packet.size() - sizeof(quint16));
+    socket->write(packet);
 }
+
 void MainWindow::connectToServer(){
     socket->connectToHost("127.0.0.1",2323);
 }
@@ -89,6 +94,7 @@ void MainWindow::authorizeUser()
 {
     username=auth.getLogin();
     qDebug()<<username;
+    SendToServer("AUTH",username);
     //qDebug<<username;
     /*Dialog Dialog(this);
     if (Dialog.exec() == QDialog::Accepted) {
@@ -105,6 +111,15 @@ void MainWindow::on_lineEdit_returnPressed()
     if(ui->lineEdit->text()==""){
         return;
     }
-    SendToServer(ui->lineEdit->text());
+    SendToServer("MESSAGE",ui->lineEdit->text());
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    if(ui->lineEdit->text()==""){
+        return;
+    }
+    SendToServer("MESSAGE",ui->lineEdit->text());
+}
+
 

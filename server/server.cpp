@@ -35,30 +35,28 @@ void Server::slotReadyRead() {
 
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_5_15);
-    QString str;
+    QString command;
+    QString data;
     QString userLogin;
+
     while (true) {
         in.startTransaction();
 
         if (nextBlockSize == 0) {
-            if (socket->bytesAvailable() < 2) {
-                qDebug()<<"nextBlockSize=0";
+            if (socket->bytesAvailable() < sizeof(quint16)) {
                 in.rollbackTransaction();
                 break;
             }
 
             in >> nextBlockSize;
-            qDebug()<<"nextBlockSize = " << nextBlockSize;
         }
 
         if (socket->bytesAvailable() < nextBlockSize) {
-            qDebug()<<"Data not full";
             in.rollbackTransaction();
             break;
         }
 
-
-        in >> userLogin >> str;
+        in >> command >> data;
 
         if (!in.commitTransaction()) {
             qDebug() << "Data not fully available yet";
@@ -66,25 +64,63 @@ void Server::slotReadyRead() {
         }
 
         nextBlockSize = 0;
-        QString message = str;
-        qDebug() << message;
-        SendToClient(message);
+        processCommand(command, data, socket);
         break;
     }
 }
-void Server::SendToClient(QString str){
-    Data.clear();
-    QDataStream out(&Data, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_5_15);
-    out<<quint16(0)<<QTime::currentTime()<<str;
-    out.device()->seek(0);
-    out<<quint16(Data.size() - sizeof(quint16));
-    //socket->write(Data);
-    for(int i=0;i<Sockets.size();i++){
-        Sockets[i]->write(Data);
+
+void Server::processCommand(const QString &command, const QString &data, QTcpSocket *socket) {
+    if (command == "AUTH") {
+        handleAuth(data, socket);
+    } else if (command == "MESSAGE") {
+        handleMessage(data);
+    } else {
+        qDebug() << "Unknown command";
     }
-    qDebug()<<"Sending commit";
 }
+
+void Server::handleAuth(const QString &data, QTcpSocket *socket) {
+    QString login = data;  // В реальном приложении также нужно учитывать пароль и проверять его
+    // Проверка логина в базе данных (пример без реальной БД)
+    if (login == "validUser") {
+        // Авторизация успешна
+        qDebug() << "User authorized:" << login;
+        SendToClient(socket, "AUTH_SUCCESS", "Welcome " + login);
+    } else {
+        // Авторизация не удалась
+        qDebug() << "Authorization failed for user:" << login;
+        SendToClient(socket, "AUTH_FAIL", "Invalid login");
+    }
+}
+
+void Server::handleMessage(const QString &data) {
+    QString message = data;
+    qDebug() << "Broadcasting message:" << message;
+    SendToAllClients("MESSAGE", message);
+}
+
+void Server::SendToClient(QTcpSocket *socket, const QString &command, const QString &message) {
+    QByteArray data;
+    QDataStream out(&data, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_5_15);
+    out << quint16(0) << command << message;
+    out.device()->seek(0);
+    out << quint16(data.size() - sizeof(quint16));
+    socket->write(data);
+}
+
+void Server::SendToAllClients(const QString &command, const QString &message) {
+    QByteArray data;
+    QDataStream out(&data, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_5_15);
+    out << quint16(0) << command << message;
+    out.device()->seek(0);
+    out << quint16(data.size() - sizeof(quint16));
+    for (QTcpSocket *socket : qAsConst(Sockets)) {
+        socket->write(data);
+    }
+}
+
 void Server::slotClientDisconnected()
 {
     socket = (QTcpSocket*)sender();
