@@ -1313,7 +1313,10 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtNetwork/qabstractsocket.h \
 		/usr/local/Qt-5.15.2/include/QtCore/QTime \
 		/usr/local/Qt-5.15.2/include/QtCore/qdatetime.h \
+<<<<<<< Updated upstream
 		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
+=======
+>>>>>>> Stashed changes
 		ui_mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtCore/QVariant \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QApplication \
@@ -1345,9 +1348,13 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
+<<<<<<< Updated upstream
 		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
 		../../dialog.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QDialog
+=======
+		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget
+>>>>>>> Stashed changes
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 
 moc_dialog.o: moc_dialog.cpp 
