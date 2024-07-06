@@ -1,8 +1,4 @@
 *.user
-/client/build*
-/server/build*
-/client/build/Right-Debug*
-/server/build/Right-Debug*
 *.user
 *.1e19004
 *.user
@@ -39,3 +35,4 @@ server/build/Right-Debug/server
 client/build/Right-Debug/client
 /client/build
 /client/build
+client/build/Right-Debug/Makefile

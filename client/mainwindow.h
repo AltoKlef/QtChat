@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTcpSocket>
 #include <QTime>
+#include "auth_window.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -17,22 +18,22 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+    void display();
 private slots:
-
     void on_pushButton_2_clicked();
-
     void on_lineEdit_returnPressed();
 
 private:
     Ui::MainWindow *ui;
+    auth_window auth;
+    QString username,password;
     QTcpSocket *socket;
     QByteArray Data;
     void SendToServer(QString str);
     quint16 nextBlockSize;
-    QString userLogin;
     void authorizeUser();
     void connectToServer();
+
 public slots:
     void slotReadyRead();
 };
