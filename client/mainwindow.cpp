@@ -1,15 +1,18 @@
 #include "mainwindow.h"
+#include "qdialog.h"
 #include "ui_mainwindow.h"
-
+#include "dialog.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     socket= new QTcpSocket(this);
+
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::slotReadyRead);
     connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
     nextBlockSize=0;
+    authorizeUser();
 }
 
 MainWindow::~MainWindow()
@@ -73,11 +76,19 @@ void MainWindow::SendToServer(QString str)
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_15);
-    out << quint16(0) << str;
+    out << quint16(0) << userLogin<<str;
     out.device()->seek(0);
     out << quint16(Data.size() - sizeof(quint16));
     socket->write(Data);
     ui->lineEdit->clear();
+}
+
+void MainWindow::authorizeUser()
+{
+    Dialog Dialog(this);
+    if (Dialog.exec() == QDialog::Accepted) {
+        userLogin = Dialog.getLogin();
+    }
 }
 
 

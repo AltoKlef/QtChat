@@ -36,11 +36,12 @@ void Server::slotReadyRead() {
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_5_15);
     QString str;
+    QString userLogin;
     while (true) {
         in.startTransaction();
 
         if (nextBlockSize == 0) {
-            if (socket->bytesAvailable() < sizeof(quint16)) {
+            if (socket->bytesAvailable() < 2) {
                 qDebug()<<"nextBlockSize=0";
                 in.rollbackTransaction();
                 break;
@@ -57,7 +58,7 @@ void Server::slotReadyRead() {
         }
 
 
-        in >>str;
+        in >> userLogin >> str;
 
         if (!in.commitTransaction()) {
             qDebug() << "Data not fully available yet";
