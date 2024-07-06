@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
     connect(&auth, &auth_window::authClicked, this, &MainWindow::authorizeUser);
     nextBlockSize=0;
-    authorizeUser();
+    //authorizeUser();
 }
 
 MainWindow::~MainWindow()
@@ -87,7 +87,9 @@ void MainWindow::connectToServer(){
 }
 void MainWindow::authorizeUser()
 {
-    auth.getLogin();
+    username=auth.getLogin();
+    qDebug()<<username;
+    //qDebug<<username;
     /*Dialog Dialog(this);
     if (Dialog.exec() == QDialog::Accepted) {
         userLogin = Dialog.getLogin();
