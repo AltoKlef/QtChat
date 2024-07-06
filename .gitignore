@@ -36,3 +36,6 @@ client/build/Right-Debug/Makefile
 client/build/Right-Debug/moc_mainwindow.o
 server/build/Right-Debug/server.o
 server/build/Right-Debug/server
+client/build/Right-Debug/client
+/client/build
+/client/build

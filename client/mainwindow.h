@@ -19,7 +19,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
 
@@ -33,6 +32,7 @@ private:
     quint16 nextBlockSize;
     QString userLogin;
     void authorizeUser();
+    void connectToServer();
 public slots:
     void slotReadyRead();
 };

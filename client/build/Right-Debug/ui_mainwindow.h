@@ -25,7 +25,6 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QPushButton *pushButton;
     QLineEdit *lineEdit;
     QTextBrowser *textBrowser;
     QPushButton *pushButton_2;
@@ -39,9 +38,6 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(10, 10, 141, 23));
         lineEdit = new QLineEdit(centralwidget);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
         lineEdit->setGeometry(QRect(40, 460, 381, 41));
@@ -68,7 +64,6 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "\320\233\320\256\320\242\320\253\320\231 \320\232\320\236\320\235\320\235\320\225\320\232\320\242", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "^_^", nullptr));
     } // retranslateUi
 

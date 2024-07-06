@@ -19,7 +19,16 @@ QString Dialog::getLogin() const
     return login;
 }
 
-void Dialog::on_buttonBox_accepted()
+
+
+
+void Dialog::on_loginButton_clicked()
 {
     login = ui->lineEdit->text();
+    if (!login.isEmpty()) {
+        accept();  // Закрыть диалог и вернуть QDialog::Accepted
+    } else {
+        ui->label->setText("Please enter a login");
+    }
 }
+

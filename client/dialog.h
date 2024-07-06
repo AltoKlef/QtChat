@@ -17,8 +17,7 @@ public:
     QString getLogin() const;
 
 private slots:
-    void on_buttonBox_accepted();
-
+    void on_loginButton_clicked();
 private:
     Ui::Dialog *ui;
     QString login;
