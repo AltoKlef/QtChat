@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
@@ -30,6 +31,8 @@ public:
     QTextBrowser *textBrowser;
     QPushButton *pushButton_2;
     QListWidget *userList;
+    QLabel *label;
+    QLabel *label_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -52,6 +55,12 @@ public:
         userList = new QListWidget(centralwidget);
         userList->setObjectName(QString::fromUtf8("userList"));
         userList->setGeometry(QRect(520, 80, 256, 331));
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(570, 40, 141, 16));
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(20, 50, 58, 15));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -70,6 +79,8 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "^_^", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\273\321\214\320\267\320\276\320\262\320\260\321\202\320\265\320\273\320\270 \320\276\320\275\320\273\320\260\320\271\320\275", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "\320\247\320\260\321\202", nullptr));
     } // retranslateUi
 
 };

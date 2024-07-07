@@ -2,3 +2,5 @@
 /client/build
 /server/build
 *.pro
+/client/build/Right-Debug
+/server/build/Right-Debug

@@ -21,7 +21,7 @@ QString auth_window::getLogin()
 
 void auth_window::wrongLogin()
 {
-    ui->label->setText("Пользователь уже авторизован, повторите попытку");
+    ui->label->setText("Ошибка! Пользователь уже авторизован");
 }
 
 void auth_window::on_authButton_clicked()

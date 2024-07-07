@@ -60,7 +60,6 @@ void MainWindow::slotReadyRead() {
 
         nextBlockSize = 0;
         processResponse(command, data);
-        break;
     }
 }
 void MainWindow::processResponse(const QString &command, const QString &data) {

@@ -62,7 +62,6 @@ void Server::slotReadyRead() {
 
         nextBlockSize = 0;
         processCommand(command, data, socket);
-        break;
     }
 }
 
