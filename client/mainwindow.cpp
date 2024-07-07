@@ -36,12 +36,13 @@ void MainWindow::slotReadyRead() {
         in.startTransaction();
 
         if (nextBlockSize == 0) {
-            if (socket->bytesAvailable() < sizeof(quint16)) {
+            if (socket->bytesAvailable() < 2) {
                 in.rollbackTransaction();
                 break;
             }
-
             in >> nextBlockSize;
+            qDebug()<<"socket->bytesAvailable(): "<<socket->bytesAvailable();
+            qDebug()<<"nextBlockSize: "<<nextBlockSize;
         }
 
         if (socket->bytesAvailable() < nextBlockSize) {
@@ -50,6 +51,7 @@ void MainWindow::slotReadyRead() {
         }
 
         in >> command >> data;
+        qDebug()<<command<<" "<<data;
 
         if (!in.commitTransaction()) {
             qDebug() << "Data not fully available yet";
@@ -61,17 +63,20 @@ void MainWindow::slotReadyRead() {
         break;
     }
 }
-
 void MainWindow::processResponse(const QString &command, const QString &data) {
     if (command == "AUTH_SUCCESS") {
         auth.hide();
         MainWindow::show();
         ui->textBrowser->append(data);
-
+        qDebug()<<"Autorised";
     } else if (command == "AUTH_FAIL") {
-        ui->textBrowser->append(data);
+        qDebug()<<"not autorised";
+        auth.wrongLogin();
     } else if (command == "MESSAGE") {
         ui->textBrowser->append(data);
+    } else if (command == "UPDATE_USERS") {
+        QStringList userList = data.split(',');
+        updateOnlineUsers(userList);
     } else {
         qDebug() << "Unknown command";
     }
@@ -112,6 +117,7 @@ void MainWindow::on_lineEdit_returnPressed()
         return;
     }
     SendToServer("MESSAGE",ui->lineEdit->text());
+    ui->lineEdit->clear();
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -120,6 +126,10 @@ void MainWindow::on_pushButton_2_clicked()
         return;
     }
     SendToServer("MESSAGE",ui->lineEdit->text());
+    ui->lineEdit->clear();
 }
 
-
+void MainWindow::updateOnlineUsers(const QStringList &userList) {
+    ui->userList->clear();
+    ui->userList->addItems(userList);
+}

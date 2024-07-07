@@ -17,8 +17,8 @@
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>460</y>
+      <x>10</x>
+      <y>420</y>
       <width>381</width>
       <height>41</height>
      </rect>
@@ -27,8 +27,8 @@
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>101</y>
+      <x>10</x>
+      <y>80</y>
       <width>491</width>
       <height>331</height>
      </rect>
@@ -37,14 +37,24 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>460</y>
+      <x>400</x>
+      <y>420</y>
       <width>101</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
      <string>^_^</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="userList">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>80</y>
+      <width>256</width>
+      <height>331</height>
+     </rect>
     </property>
    </widget>
   </widget>

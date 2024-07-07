@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -28,6 +29,7 @@ public:
     QLineEdit *lineEdit;
     QTextBrowser *textBrowser;
     QPushButton *pushButton_2;
+    QListWidget *userList;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -40,13 +42,16 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         lineEdit = new QLineEdit(centralwidget);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(40, 460, 381, 41));
+        lineEdit->setGeometry(QRect(10, 420, 381, 41));
         textBrowser = new QTextBrowser(centralwidget);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
-        textBrowser->setGeometry(QRect(50, 101, 491, 331));
+        textBrowser->setGeometry(QRect(10, 80, 491, 331));
         pushButton_2 = new QPushButton(centralwidget);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(430, 460, 101, 41));
+        pushButton_2->setGeometry(QRect(400, 420, 101, 41));
+        userList = new QListWidget(centralwidget);
+        userList->setObjectName(QString::fromUtf8("userList"));
+        userList->setGeometry(QRect(520, 80, 256, 331));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));

@@ -35,6 +35,7 @@ private:
 
     void SendToServer(const QString &command, const QString &data);
     void processResponse(const QString &command, const QString &data);
+    void updateOnlineUsers(const QStringList &userList);
 public slots:
     void slotReadyRead();
 };

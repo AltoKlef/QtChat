@@ -15,6 +15,7 @@ public:
     explicit auth_window(QWidget *parent = nullptr);
     ~auth_window();
     QString getLogin();
+    void wrongLogin();
     //String getPass();
 private slots:
     void on_authButton_clicked();
