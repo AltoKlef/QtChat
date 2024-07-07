@@ -132,3 +132,9 @@ void MainWindow::updateOnlineUsers(const QStringList &userList) {
     ui->userList->clear();
     ui->userList->addItems(userList);
 }
+
+void MainWindow::on_onlineButton_clicked()
+{
+    SendToServer("ONLINE",username);
+}
+

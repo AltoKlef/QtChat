@@ -33,6 +33,7 @@ public:
     QListWidget *userList;
     QLabel *label;
     QLabel *label_2;
+    QPushButton *onlineButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -61,6 +62,9 @@ public:
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(20, 50, 58, 15));
+        onlineButton = new QPushButton(centralwidget);
+        onlineButton->setObjectName(QString::fromUtf8("onlineButton"));
+        onlineButton->setGeometry(QRect(660, 420, 111, 23));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -81,6 +85,7 @@ public:
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "^_^", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\273\321\214\320\267\320\276\320\262\320\260\321\202\320\265\320\273\320\270 \320\276\320\275\320\273\320\260\320\271\320\275", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "\320\247\320\260\321\202", nullptr));
+        onlineButton->setText(QCoreApplication::translate("MainWindow", "\320\236\320\261\320\275\320\276\320\262\320\270\321\202\321\214 \321\201\320\277\320\270\321\201\320\276\320\272", nullptr));
     } // retranslateUi
 
 };

@@ -23,6 +23,7 @@ private:
     void handleMessage(const QString &data, QTcpSocket *socket);
     void SendToAllClients(const QString &command, const QString &message);
     void updateAllClientsUserList();
+    void UpdateUserList(QTcpSocket *socket);
 public slots:
     void incomingConnection(qintptr socketDescription);
     void slotReadyRead();

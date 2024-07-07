@@ -4,3 +4,9 @@
 *.pro
 /client/build/Right-Debug
 /server/build/Right-Debug
+/client/build/Right-Debug
+client/build/Right-Debug/moc_mainwindow.cpp
+client/build/Right-Debug/moc_mainwindow.o
+client/build/Right-Debug/ui_mainwindow.h
+server/build/Right-Debug/server
+server/build/Right-Debug/server.o

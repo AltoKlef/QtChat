@@ -23,6 +23,8 @@ private slots:
     void on_pushButton_2_clicked();
     void on_lineEdit_returnPressed();
 
+    void on_onlineButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     auth_window auth;

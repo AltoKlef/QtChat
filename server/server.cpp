@@ -70,7 +70,10 @@ void Server::processCommand(const QString &command, const QString &data, QTcpSoc
         handleAuth(data, socket);
     } else if (command == "MESSAGE") {
         handleMessage(data, socket);
-    } else {
+    }else if(command == "ONLINE"){
+        UpdateUserList(socket);
+    }
+    else {
         qDebug() << "Unknown command";
     }
 }
@@ -137,5 +140,12 @@ void Server::updateAllClientsUserList() {
     for (QTcpSocket *client : clients.keys()) {
         SendToClient(client, "UPDATE_USERS", userListString);
     }
+}
+void Server::UpdateUserList(QTcpSocket *socket){
+    QStringList userList = clients.values();
+    QString userListString = userList.join(',');
+    qDebug()<<"updated";
+    SendToClient(socket,"UPDATE_USERS",userListString);
+
 }
 
