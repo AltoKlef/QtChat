@@ -6,16 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    createSocket();
-
-    //connectToServer();
-    //authorizeUser();
-}
-void MainWindow::createSocket() {
-    if (socket) {
-        socket->deleteLater();
-    }
-
     socket = new QTcpSocket(this);
 
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::slotReadyRead);
@@ -25,8 +15,9 @@ void MainWindow::createSocket() {
     connect(socket, &QTcpSocket::connected, this, &MainWindow::onConnected);
 
     nextBlockSize = 0;
-    isConnected = 0;
+    isConnected = false;
 }
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -36,17 +27,11 @@ void MainWindow::display()
 {
     auth.show();
 }
-void MainWindow::handleDisconnection() {
-    isConnected = 0;
-    qDebug() << "Disconnected from server";
-    this->hide();
-    auth.show();
-    createSocket();  // Создаем новый сокет после отключения
-}
+
 void MainWindow::onConnected()
 {
     isConnected = true;
-    username=auth.getLogin();
+    username = auth.getLogin();
     SendToServer("AUTH", username);
 }
 
@@ -65,8 +50,8 @@ void MainWindow::slotReadyRead() {
                 break;
             }
             in >> nextBlockSize;
-            qDebug()<<"socket->bytesAvailable(): "<<socket->bytesAvailable();
-            qDebug()<<"nextBlockSize: "<<nextBlockSize;
+            qDebug() << "socket->bytesAvailable(): " << socket->bytesAvailable();
+            qDebug() << "nextBlockSize: " << nextBlockSize;
         }
 
         if (socket->bytesAvailable() < nextBlockSize) {
@@ -75,7 +60,7 @@ void MainWindow::slotReadyRead() {
         }
 
         in >> command >> data;
-        qDebug()<<command<<" "<<data;
+        qDebug() << command << " " << data;
 
         if (!in.commitTransaction()) {
             qDebug() << "Data not fully available yet";
@@ -86,15 +71,15 @@ void MainWindow::slotReadyRead() {
         processResponse(command, data);
     }
 }
+
 void MainWindow::processResponse(const QString &command, const QString &data) {
     if (command == "AUTH_SUCCESS") {
         auth.hide();
-        MainWindow::show();
+        this->show();
         ui->textBrowser->append(data);
-
-        qDebug()<<"Autorised";
+        qDebug() << "Authorized";
     } else if (command == "AUTH_FAIL") {
-        qDebug()<<"not autorised";
+        qDebug() << "Not authorized";
         auth.wrongLogin();
     } else if (command == "MESSAGE") {
         ui->textBrowser->append(data);
@@ -118,19 +103,22 @@ void MainWindow::SendToServer(const QString &command, const QString &data) {
 
 void MainWindow::connectToServer(){
     if (socket->state() == QAbstractSocket::UnconnectedState) {
-        qDebug()<<"reconnecting";
+        qDebug() << "Reconnecting";
         socket->connectToHost("127.0.0.1", 2323);
     }
-
 }
+
 void MainWindow::authorizeUser()
 {
-    qDebug()<<auth.getLogin();
-    qDebug()<<"isConnected: "<< isConnected;
-    if (isConnected==0){
+    qDebug() << auth.getLogin();
+    qDebug() << "isConnected: " << isConnected;
+    if (!isConnected) {
         connectToServer();
+    } else {
+        SendToServer("AUTH", auth.getLogin());
     }
 }
+
 void MainWindow::handleError(QAbstractSocket::SocketError socketError)
 {
     QString errorMessage;
@@ -151,27 +139,34 @@ void MainWindow::handleError(QAbstractSocket::SocketError socketError)
     default:
         errorMessage = socket->errorString();
     }
-    qDebug()<<errorMessage;
-    isConnected=0;
+    qDebug() << errorMessage;
+    isConnected = false;
     QMessageBox::critical(this, "Connection Error", errorMessage);
     //auth.connectionError(errorMessage);
 }
 
+void MainWindow::handleDisconnection() {
+    isConnected = false;
+    qDebug() << "Disconnected from server";
+    this->hide();
+    auth.show();
+}
+
 void MainWindow::on_lineEdit_returnPressed()
 {
-    if(ui->lineEdit->text()==""){
+    if (ui->lineEdit->text().isEmpty()) {
         return;
     }
-    SendToServer("MESSAGE",ui->lineEdit->text());
+    SendToServer("MESSAGE", ui->lineEdit->text());
     ui->lineEdit->clear();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    if(ui->lineEdit->text()==""){
+    if (ui->lineEdit->text().isEmpty()) {
         return;
     }
-    SendToServer("MESSAGE",ui->lineEdit->text());
+    SendToServer("MESSAGE", ui->lineEdit->text());
     ui->lineEdit->clear();
 }
 
@@ -182,6 +177,6 @@ void MainWindow::updateOnlineUsers(const QStringList &userList) {
 
 void MainWindow::on_onlineButton_clicked()
 {
-    SendToServer("ONLINE",username);
+    SendToServer("ONLINE", username);
 }
 

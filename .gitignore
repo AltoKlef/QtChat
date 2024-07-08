@@ -16,3 +16,5 @@ client/client.pro.user
 client/build/Right-Debug/moc_mainwindow.o
 client/build/Right-Debug/mainwindow.o
 client/build/Right-Debug/client
+client/build/Right-Debug/client
+client/build/Right-Debug/mainwindow.o
