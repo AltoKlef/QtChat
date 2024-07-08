@@ -2,7 +2,7 @@
 #define AUTH_WINDOW_H
 
 #include <QDialog>
-
+#include <QMessageBox>
 namespace Ui {
 class auth_window;
 }
@@ -21,7 +21,6 @@ private slots:
     void on_authButton_clicked();
     void on_logLineEdit_returnPressed();
     void on_logLineEdit_textEdited(const QString &arg1);
-
 signals:
     void authClicked();
 private:

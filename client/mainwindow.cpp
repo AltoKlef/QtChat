@@ -6,16 +6,27 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    socket= new QTcpSocket(this);
+    createSocket();
 
-    connect(socket, &QTcpSocket::readyRead, this, &MainWindow::slotReadyRead);
-    connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
-    connect(&auth, &auth_window::authClicked, this, &MainWindow::authorizeUser);
-    nextBlockSize=0;
-    connectToServer();
+    //connectToServer();
     //authorizeUser();
 }
+void MainWindow::createSocket() {
+    if (socket) {
+        socket->deleteLater();
+    }
 
+    socket = new QTcpSocket(this);
+
+    connect(socket, &QTcpSocket::readyRead, this, &MainWindow::slotReadyRead);
+    connect(socket, &QTcpSocket::disconnected, this, &MainWindow::handleDisconnection);
+    connect(&auth, &auth_window::authClicked, this, &MainWindow::authorizeUser);
+    connect(socket, &QTcpSocket::errorOccurred, this, &MainWindow::handleError);
+    connect(socket, &QTcpSocket::connected, this, &MainWindow::onConnected);
+
+    nextBlockSize = 0;
+    isConnected = 0;
+}
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -24,6 +35,19 @@ MainWindow::~MainWindow()
 void MainWindow::display()
 {
     auth.show();
+}
+void MainWindow::handleDisconnection() {
+    isConnected = 0;
+    qDebug() << "Disconnected from server";
+    this->hide();
+    auth.show();
+    createSocket();  // Создаем новый сокет после отключения
+}
+void MainWindow::onConnected()
+{
+    isConnected = true;
+    username=auth.getLogin();
+    SendToServer("AUTH", username);
 }
 
 void MainWindow::slotReadyRead() {
@@ -67,6 +91,7 @@ void MainWindow::processResponse(const QString &command, const QString &data) {
         auth.hide();
         MainWindow::show();
         ui->textBrowser->append(data);
+
         qDebug()<<"Autorised";
     } else if (command == "AUTH_FAIL") {
         qDebug()<<"not autorised";
@@ -92,23 +117,45 @@ void MainWindow::SendToServer(const QString &command, const QString &data) {
 }
 
 void MainWindow::connectToServer(){
-    socket->connectToHost("127.0.0.1",2323);
+    if (socket->state() == QAbstractSocket::UnconnectedState) {
+        qDebug()<<"reconnecting";
+        socket->connectToHost("127.0.0.1", 2323);
+    }
+
 }
 void MainWindow::authorizeUser()
 {
-    username=auth.getLogin();
-    qDebug()<<username;
-    SendToServer("AUTH",username);
-    //qDebug<<username;
-    /*Dialog Dialog(this);
-    if (Dialog.exec() == QDialog::Accepted) {
-        userLogin = Dialog.getLogin();
-        qDebug()<<userLogin;
+    qDebug()<<auth.getLogin();
+    qDebug()<<"isConnected: "<< isConnected;
+    if (isConnected==0){
         connectToServer();
-    }*/
-
+    }
 }
+void MainWindow::handleError(QAbstractSocket::SocketError socketError)
+{
+    QString errorMessage;
 
+    switch (socketError) {
+    case QAbstractSocket::HostNotFoundError:
+        errorMessage = "The host was not found.";
+        break;
+    case QAbstractSocket::ConnectionRefusedError:
+        errorMessage = "The connection was refused by the peer.";
+        break;
+    case QAbstractSocket::RemoteHostClosedError:
+        errorMessage = "The remote host closed the connection.";
+        socket->disconnectFromHost();
+        this->hide();
+        auth.show();
+        break;
+    default:
+        errorMessage = socket->errorString();
+    }
+    qDebug()<<errorMessage;
+    isConnected=0;
+    QMessageBox::critical(this, "Connection Error", errorMessage);
+    //auth.connectionError(errorMessage);
+}
 
 void MainWindow::on_lineEdit_returnPressed()
 {

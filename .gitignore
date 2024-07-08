@@ -10,3 +10,9 @@ client/build/Right-Debug/moc_mainwindow.o
 client/build/Right-Debug/ui_mainwindow.h
 server/build/Right-Debug/server
 server/build/Right-Debug/server.o
+/client/build/Right-Debug
+server/server.pro.user
+client/client.pro.user
+client/build/Right-Debug/moc_mainwindow.o
+client/build/Right-Debug/mainwindow.o
+client/build/Right-Debug/client

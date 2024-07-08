@@ -22,7 +22,6 @@ public:
 private slots:
     void on_pushButton_2_clicked();
     void on_lineEdit_returnPressed();
-
     void on_onlineButton_clicked();
 
 private:
@@ -34,10 +33,14 @@ private:
     quint16 nextBlockSize;
     void authorizeUser();
     void connectToServer();
-
+    bool isConnected;
     void SendToServer(const QString &command, const QString &data);
     void processResponse(const QString &command, const QString &data);
     void updateOnlineUsers(const QStringList &userList);
+    void handleError(QAbstractSocket::SocketError socketError);
+    void onConnected();
+    void createSocket();
+    void handleDisconnection();
 public slots:
     void slotReadyRead();
 };

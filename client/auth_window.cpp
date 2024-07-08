@@ -41,3 +41,4 @@ void auth_window::on_logLineEdit_textEdited(const QString &arg1)
     login=arg1;
 }
 
+
