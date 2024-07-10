@@ -5,6 +5,8 @@
 #include <QTcpSocket>
 #include <QTime>
 #include "auth_window.h"
+#include "privatechatwindow.h"
+#include "qlistwidget.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -41,6 +43,7 @@ private:
     void onConnected();
     void createSocket();
     void handleDisconnection();
+    void openChatWindow(QListWidgetItem *item);
 public slots:
     void slotReadyRead();
 };

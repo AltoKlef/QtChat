@@ -3,3 +3,4 @@
 /server/build/Right-Debug
 *.pro
 
+/client/build/Right-Debug

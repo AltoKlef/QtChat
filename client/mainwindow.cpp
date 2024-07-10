@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&auth, &auth_window::authClicked, this, &MainWindow::authorizeUser);
     connect(socket, &QTcpSocket::errorOccurred, this, &MainWindow::handleError);
     connect(socket, &QTcpSocket::connected, this, &MainWindow::onConnected);
-
+    connect(ui->userList, &QListWidget::itemClicked, this, &MainWindow::openChatWindow);
     nextBlockSize = 0;
     isConnected = false;
 }
@@ -185,3 +185,12 @@ void MainWindow::on_onlineButton_clicked()
     SendToServer("ONLINE", username);
 }
 
+void MainWindow::openChatWindow(QListWidgetItem *item)
+{
+    QString userName = item->text();
+    //QMessageBox::information(this, "Private Chat", "Open chat with " + userName);
+
+    // Здесь можно создать и открыть новое окно для личных сообщений
+    PrivateChatWindow *chatWindow = new PrivateChatWindow(userName, this);
+    chatWindow->show();
+}
