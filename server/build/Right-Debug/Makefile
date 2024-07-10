@@ -57,7 +57,8 @@ SOURCES       = ../../main.cpp \
 OBJECTS       = main.o \
 		server.o \
 		moc_server.o
-DIST          = /usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
+DIST          = ../../config.ini \
+		/usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.15.2/mkspecs/common/unix.conf \
 		/usr/local/Qt-5.15.2/mkspecs/common/linux.conf \
 		/usr/local/Qt-5.15.2/mkspecs/common/sanitize.conf \
@@ -231,6 +232,7 @@ DIST          = /usr/local/Qt-5.15.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf \
 		/usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf \
 		/usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf \
+		../../.qmake.stash \
 		/usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf \
@@ -438,6 +440,7 @@ Makefile: ../../server.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 		/usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf \
 		/usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf \
 		/usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf \
@@ -634,6 +637,7 @@ Makefile: ../../server.pro /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf /us
 /usr/local/Qt-5.15.2/mkspecs/features/qt_config.prf:
 /usr/local/Qt-5.15.2/mkspecs/linux-g++/qmake.conf:
 /usr/local/Qt-5.15.2/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/local/Qt-5.15.2/mkspecs/features/exclusive_builds.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/toolchain.prf:
 /usr/local/Qt-5.15.2/mkspecs/features/default_pre.prf:

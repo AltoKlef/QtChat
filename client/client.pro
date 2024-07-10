@@ -11,17 +11,23 @@ CONFIG += c++14
 SOURCES += \
     auth_window.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    privatechatwindow.cpp
 
 HEADERS += \
     auth_window.h \
-    mainwindow.h
+    mainwindow.h \
+    privatechatwindow.h
 
 FORMS += \
     auth_window.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    privatechatwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    config.ini

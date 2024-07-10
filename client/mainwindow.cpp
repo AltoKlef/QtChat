@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QSettings>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -104,7 +105,11 @@ void MainWindow::SendToServer(const QString &command, const QString &data) {
 void MainWindow::connectToServer(){
     if (socket->state() == QAbstractSocket::UnconnectedState) {
         qDebug() << "Reconnecting";
-        socket->connectToHost("127.0.0.1", 2323);
+        QSettings settings("config.ini", QSettings::IniFormat);
+        QString ip = settings.value("Server/IP").toString();
+        int port = settings.value("Server/Port").toInt();
+        qDebug()<<ip<<"   "<<port;
+        socket->connectToHost(ip, port);
     }
 }
 
