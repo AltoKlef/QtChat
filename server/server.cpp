@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QTcpSocket>
 #include <QDataStream>
+#include <QTime>
 Server::Server() {
     if (this->listen(QHostAddress::Any, 2323)) {
         qDebug() << "Server started";
@@ -54,7 +55,7 @@ void Server::slotReadyRead() {
         }
 
         in >> command >> data;
-        qDebug()<<command<< "data: "<<data;
+        qDebug() << command << "data:" << data;
         if (!in.commitTransaction()) {
             qDebug() << "Data not fully available yet";
             break;
@@ -78,14 +79,7 @@ void Server::handleAuth(const QString &data, QTcpSocket *socket) {
     }
 }
 
-void Server::handleMessage(const QString &data, QTcpSocket *socket) {
-    QString login;
-    for (auto it = clients.constBegin(); it != clients.constEnd(); ++it) {
-        if (it.value() == socket) {
-            login = it.key();
-            break;
-        }
-    }
+void Server::handleMessage(const QString &data, const QString &login) {
     QString message = QString("%1 %2: %3").arg(QTime::currentTime().toString(), login, data);
     qDebug() << "Broadcasting message:" << message;
     SendToAllClients("MESSAGE", message);
@@ -108,7 +102,7 @@ void Server::SendToAllClients(const QString &command, const QString &message) {
     out << quint16(0) << command << message;
     out.device()->seek(0);
     out << quint16(data.size() - sizeof(quint16));
-    for (QTcpSocket *socket : clients) {
+    for (QTcpSocket *socket : clients.values()) {
         socket->write(data);
     }
 }
@@ -125,7 +119,7 @@ void Server::slotClientDisconnected() {
         }
         clients.remove(user);
         socket->deleteLater();
-        qDebug() << "Client disconnected";
+        qDebug() << "Client disconnected:" << user;
         updateAllClientsUserList();
     }
 }
@@ -134,15 +128,15 @@ void Server::updateAllClientsUserList() {
     QStringList userList = clients.keys();
     QString userListString = userList.join(',');
 
-    for (QTcpSocket *client : clients) {
+    for (QTcpSocket *client : clients.values()) {
         SendToClient(client, "UPDATE_USERS", userListString);
     }
 }
 
-void Server::UpdateUserList(QTcpSocket *socket){
+void Server::UpdateUserList(QTcpSocket *socket) {
     QStringList userList = clients.keys();
     QString userListString = userList.join(',');
-    qDebug()<<"updated";
+    qDebug() << "User list updated";
     SendToClient(socket, "UPDATE_USERS", userListString);
 }
 
@@ -150,14 +144,27 @@ void Server::processCommand(const QString &command, const QString &data, QTcpSoc
     if (command == "AUTH") {
         handleAuth(data, socket);
     } else if (command == "MESSAGE") {
-        handleMessage(data, socket);
+        QString login;
+        for (auto it = clients.constBegin(); it != clients.constEnd(); ++it) {
+            if (it.value() == socket) {
+                login = it.key();
+                break;
+            }
+        }
+        handleMessage(data, login);
     } else if (command == "PRIVATE_MESSAGE") {
-
         QStringList parts = data.split("~");
         if (parts.size() == 2) {
             QString toUser = parts[0];
             QString message = parts[1];
-            handlePrivateMessage(toUser, message, socket);
+            QString fromUser;
+            for (auto it = clients.constBegin(); it != clients.constEnd(); ++it) {
+                if (it.value() == socket) {
+                    fromUser = it.key();
+                    break;
+                }
+            }
+            handlePrivateMessage(toUser, message, fromUser);
         }
     } else if (command == "ONLINE") {
         UpdateUserList(socket);
@@ -166,18 +173,10 @@ void Server::processCommand(const QString &command, const QString &data, QTcpSoc
     }
 }
 
-void Server::handlePrivateMessage(const QString &toUser, const QString &message, QTcpSocket *fromSocket) {
-    QString fromUser;
-    for (auto it = clients.constBegin(); it != clients.constEnd(); ++it) {
-        if (it.value() == fromSocket) {
-            fromUser = it.key();
-            break;
-        }
-    }
-
+void Server::handlePrivateMessage(const QString &toUser, const QString &message, const QString &fromUser) {
     if (clients.contains(toUser)) {
         QTcpSocket *toSocket = clients[toUser];
-        SendToClient(toSocket, "PRIVATE_MESSAGE", QTime::currentTime().toString()+ "~"+fromUser + "~" + message);
-        qDebug()<<"Private message: "<<message;
+        SendToClient(toSocket, "PRIVATE_MESSAGE", QTime::currentTime().toString() + "~" + fromUser + "~" + message);
+        qDebug() << "Private message from" << fromUser << "to" << toUser << ":" << message;
     }
 }

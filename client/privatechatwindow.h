@@ -22,6 +22,8 @@ signals:
 private slots:
     void on_sendButton_clicked();
 
+    void on_exitButton_clicked();
+
 private:
     Ui::PrivateChatWindow *ui;
     QString userName;

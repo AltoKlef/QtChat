@@ -6,7 +6,7 @@ auth_window::auth_window(QWidget *parent)
     , ui(new Ui::auth_window)
 {
     ui->setupUi(this);
-
+    setWindowTitle("Hello window");
 }
 
 auth_window::~auth_window()

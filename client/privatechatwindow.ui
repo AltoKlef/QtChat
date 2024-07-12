@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>640</height>
+    <height>502</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,18 +16,18 @@
   <widget class="QTextBrowser" name="chat">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>30</x>
      <y>60</y>
-     <width>256</width>
-     <height>192</height>
+     <width>341</width>
+     <height>371</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="sendButton">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>270</y>
+     <x>290</x>
+     <y>440</y>
      <width>80</width>
      <height>23</height>
     </rect>
@@ -39,11 +39,24 @@
   <widget class="QLineEdit" name="messageLineEdit">
    <property name="geometry">
     <rect>
-     <x>122</x>
-     <y>270</y>
+     <x>120</x>
+     <y>440</y>
      <width>161</width>
      <height>22</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exitButton">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>440</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Выйти</string>
    </property>
   </widget>
  </widget>

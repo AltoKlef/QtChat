@@ -39,10 +39,16 @@ void PrivateChatWindow::appendMessage(const QString &message)
 
 void PrivateChatWindow::onWindowClosed()
 {
-    emit sendMessage(userName, userName+" has closed the chat window.");
+    emit sendMessage(userName, "User has closed the chat window.");
 }
 void PrivateChatWindow::closeEvent(QCloseEvent *event)
 {
     onWindowClosed();
     QDialog::closeEvent(event);
 }
+
+void PrivateChatWindow::on_exitButton_clicked()
+{
+    this->close();
+}
+

@@ -22,10 +22,11 @@ public:
     ~MainWindow();
     void display();
 private slots:
-    void on_pushButton_2_clicked();
     void on_lineEdit_returnPressed();
     void on_onlineButton_clicked();
     void handlePrivateMessage(const QString &toUser, const QString &message);
+    void on_exitButton_clicked();
+    void on_sendButton_clicked();
 
 private:
     Ui::MainWindow *ui;

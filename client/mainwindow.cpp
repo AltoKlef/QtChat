@@ -21,8 +21,12 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    if (socket->state() == QAbstractSocket::ConnectedState) {
+        socket->disconnectFromHost();
+        socket->waitForDisconnected();
+    }
     delete ui;
-    qDeleteAll(chatWindows); // Удалить все окна чатов
+    qDeleteAll(chatWindows);
 }
 
 void MainWindow::display()
@@ -186,15 +190,6 @@ void MainWindow::on_lineEdit_returnPressed()
     ui->lineEdit->clear();
 }
 
-void MainWindow::on_pushButton_2_clicked()
-{
-    if (ui->lineEdit->text().isEmpty()) {
-        return;
-    }
-    SendToServer("MESSAGE", ui->lineEdit->text());
-    ui->lineEdit->clear();
-}
-
 void MainWindow::updateOnlineUsers(const QStringList &userList) {
     ui->userList->clear();
     ui->userList->addItems(userList);
@@ -234,3 +229,26 @@ void MainWindow::handlePrivateMessage(const QString &toUser, const QString &mess
 void MainWindow::chatClicked(QListWidgetItem *item){
     openChatWindow(item->text());
 }
+
+
+
+
+void MainWindow::on_sendButton_clicked()
+{
+    if (ui->lineEdit->text().isEmpty()) {
+        return;
+    }
+    SendToServer("MESSAGE", ui->lineEdit->text());
+    ui->lineEdit->clear();
+}
+
+
+void MainWindow::on_exitButton_clicked()
+{
+    if (socket->state() == QAbstractSocket::ConnectedState) {
+        socket->disconnectFromHost();
+        socket->waitForDisconnected();
+    }
+    qApp->quit();
+}
+
