@@ -1,6 +1,9 @@
 #include "privatechatwindow.h"
 #include "ui_privatechatwindow.h"
 #include "QTime"
+#include <QKeyEvent>
+
+#include "filter.h"
 PrivateChatWindow::PrivateChatWindow(const QString &username, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PrivateChatWindow)
@@ -8,8 +11,11 @@ PrivateChatWindow::PrivateChatWindow(const QString &username, QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("Private Chat with " + username);
     userName=username;
+    NoTildeFilter *filter = new NoTildeFilter;
+    ui->messageLineEdit->installEventFilter(filter); // Устанавливаем фильтр событий
 
 }
+
 
 PrivateChatWindow::~PrivateChatWindow()
 {

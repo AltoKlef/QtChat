@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(socket, &QTcpSocket::errorOccurred, this, &MainWindow::handleError);
     connect(socket, &QTcpSocket::connected, this, &MainWindow::onConnected);
     connect(ui->userList, &QListWidget::itemClicked, this, &MainWindow::chatClicked);
-
+    setWindowTitle("General chat");
     nextBlockSize = 0;
     isConnected = false;
 }

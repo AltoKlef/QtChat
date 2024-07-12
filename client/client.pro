@@ -10,12 +10,14 @@ CONFIG += c++14
 
 SOURCES += \
     auth_window.cpp \
+    filter.cpp \
     main.cpp \
     mainwindow.cpp \
     privatechatwindow.cpp
 
 HEADERS += \
     auth_window.h \
+    filter.h \
     mainwindow.h \
     privatechatwindow.h
 

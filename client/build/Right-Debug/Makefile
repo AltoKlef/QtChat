@@ -53,16 +53,20 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../auth_window.cpp \
+		../../filter.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../privatechatwindow.cpp moc_auth_window.cpp \
+		moc_filter.cpp \
 		moc_mainwindow.cpp \
 		moc_privatechatwindow.cpp
 OBJECTS       = auth_window.o \
+		filter.o \
 		main.o \
 		mainwindow.o \
 		privatechatwindow.o \
 		moc_auth_window.o \
+		moc_filter.o \
 		moc_mainwindow.o \
 		moc_privatechatwindow.o
 DIST          = ../../config.ini \
@@ -262,8 +266,10 @@ DIST          = ../../config.ini \
 		/usr/local/Qt-5.15.2/mkspecs/features/yacc.prf \
 		/usr/local/Qt-5.15.2/mkspecs/features/lex.prf \
 		../../../../client.pro ../../auth_window.h \
+		../../filter.h \
 		../../mainwindow.h \
 		../../privatechatwindow.h ../../auth_window.cpp \
+		../../filter.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../privatechatwindow.cpp
@@ -686,8 +692,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/Qt-5.15.2/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../auth_window.h ../../mainwindow.h ../../privatechatwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../auth_window.cpp ../../main.cpp ../../mainwindow.cpp ../../privatechatwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../auth_window.h ../../filter.h ../../mainwindow.h ../../privatechatwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../auth_window.cpp ../../filter.cpp ../../main.cpp ../../mainwindow.cpp ../../privatechatwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../auth_window.ui ../../mainwindow.ui ../../privatechatwindow.ui $(DISTDIR)/
 
 
@@ -720,9 +726,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/local/Qt-5.15.2/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1y -Wall -Wextra -dM -E -o moc_predefs.h /usr/local/Qt-5.15.2/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_auth_window.cpp moc_mainwindow.cpp moc_privatechatwindow.cpp
+compiler_moc_header_make_all: moc_auth_window.cpp moc_filter.cpp moc_mainwindow.cpp moc_privatechatwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_auth_window.cpp moc_mainwindow.cpp moc_privatechatwindow.cpp
+	-$(DEL_FILE) moc_auth_window.cpp moc_filter.cpp moc_mainwindow.cpp moc_privatechatwindow.cpp
 moc_auth_window.cpp: ../../auth_window.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QDialog \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
@@ -833,6 +839,95 @@ moc_auth_window.cpp: ../../auth_window.h \
 		moc_predefs.h \
 		/usr/local/Qt-5.15.2/bin/moc
 	/usr/local/Qt-5.15.2/bin/moc $(DEFINES) --include /home/alto/QtProjects/QtChat/client/build/Right-Debug/moc_predefs.h -I/usr/local/Qt-5.15.2/mkspecs/linux-g++ -I/home/alto/QtProjects/QtChat/client -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtWidgets -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../auth_window.h -o moc_auth_window.cpp
+
+moc_filter.cpp: ../../filter.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QObject \
+		/usr/local/Qt-5.15.2/include/QtCore/qobject.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobjectdefs.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qnamespace.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qglobal.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qconfig-bootstrapped.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qconfig.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtcore-config.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsystemdetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qprocessordetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcompilerdetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtypeinfo.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsysinfo.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlogging.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qflags.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbasicatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_bootstrap.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qgenericatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_cxx11.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_msvc.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qglobalstatic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmutex.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qnumeric.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qversiontagging.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobjectdefs_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstring.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qchar.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbytearray.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qrefcount.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qarraydata.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringliteral.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringalgorithms.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringview.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringbuilder.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qalgorithms.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qiterator.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qhashfunctions.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qpair.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvector.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontainertools_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qpoint.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbytearraylist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringlist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qregexp.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringmatcher.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcoreevent.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qscopedpointer.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmetatype.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvarlengtharray.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontainerfwd.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobject_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QEvent \
+		/usr/local/Qt-5.15.2/include/QtGui/QKeyEvent \
+		/usr/local/Qt-5.15.2/include/QtGui/qevent.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtguiglobal.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtgui-config.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qwindowdefs.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qwindowdefs_win.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qregion.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qrect.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmargins.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsize.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qdatastream.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qiodevice.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qkeysequence.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvariant.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmap.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qdebug.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qhash.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtextstream.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlocale.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qshareddata.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qset.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontiguouscache.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsharedpointer.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsharedpointer_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qurl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qurlquery.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qfile.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qfiledevice.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qvector2d.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtouchdevice.h \
+		moc_predefs.h \
+		/usr/local/Qt-5.15.2/bin/moc
+	/usr/local/Qt-5.15.2/bin/moc $(DEFINES) --include /home/alto/QtProjects/QtChat/client/build/Right-Debug/moc_predefs.h -I/usr/local/Qt-5.15.2/mkspecs/linux-g++ -I/home/alto/QtProjects/QtChat/client -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtWidgets -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../filter.h -o moc_filter.cpp
 
 moc_mainwindow.cpp: ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMainWindow \
@@ -954,29 +1049,11 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMessageBox \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qmessagebox.h \
 		../../privatechatwindow.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QVBoxLayout \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qboxlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlayoutitem.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qgridlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QTextEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextcursor.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextformat.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qpen.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QPushButton \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qpushbutton.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractbutton.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qlistwidget.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qlistview.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemview.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qabstractitemmodel.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qitemselectionmodel.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemdelegate.h \
@@ -1098,27 +1175,6 @@ moc_privatechatwindow.cpp: ../../privatechatwindow.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qfiledevice.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qvector2d.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtouchdevice.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QVBoxLayout \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qboxlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlayoutitem.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qgridlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QTextEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextcursor.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextformat.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qpen.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QPushButton \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qpushbutton.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractbutton.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qicon.h \
 		moc_predefs.h \
 		/usr/local/Qt-5.15.2/bin/moc
 	/usr/local/Qt-5.15.2/bin/moc $(DEFINES) --include /home/alto/QtProjects/QtChat/client/build/Right-Debug/moc_predefs.h -I/usr/local/Qt-5.15.2/mkspecs/linux-g++ -I/home/alto/QtProjects/QtChat/client -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtWidgets -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../privatechatwindow.h -o moc_privatechatwindow.cpp
@@ -1283,6 +1339,93 @@ auth_window.o: ../../auth_window.cpp ../../auth_window.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o auth_window.o ../../auth_window.cpp
 
+filter.o: ../../filter.cpp ../../filter.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QObject \
+		/usr/local/Qt-5.15.2/include/QtCore/qobject.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobjectdefs.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qnamespace.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qglobal.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qconfig-bootstrapped.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qconfig.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtcore-config.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsystemdetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qprocessordetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcompilerdetection.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtypeinfo.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsysinfo.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlogging.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qflags.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbasicatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_bootstrap.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qgenericatomic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_cxx11.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qatomic_msvc.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qglobalstatic.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmutex.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qnumeric.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qversiontagging.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobjectdefs_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstring.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qchar.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbytearray.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qrefcount.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qarraydata.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringliteral.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringalgorithms.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringview.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringbuilder.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qalgorithms.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qiterator.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qhashfunctions.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qpair.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvector.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontainertools_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qpoint.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qbytearraylist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringlist.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qregexp.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qstringmatcher.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcoreevent.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qscopedpointer.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmetatype.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvarlengtharray.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontainerfwd.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qobject_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QEvent \
+		/usr/local/Qt-5.15.2/include/QtGui/QKeyEvent \
+		/usr/local/Qt-5.15.2/include/QtGui/qevent.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtguiglobal.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtgui-config.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qwindowdefs.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qwindowdefs_win.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qregion.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qrect.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmargins.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsize.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qdatastream.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qiodevice.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qkeysequence.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qvariant.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qmap.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qdebug.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qhash.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qtextstream.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qlocale.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qshareddata.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qset.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcontiguouscache.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsharedpointer.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qsharedpointer_impl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qurl.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qurlquery.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qfile.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qfiledevice.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qvector2d.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtouchdevice.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filter.o ../../filter.cpp
+
 main.o: ../../main.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMainWindow \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qmainwindow.h \
@@ -1403,29 +1546,11 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMessageBox \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qmessagebox.h \
 		../../privatechatwindow.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QVBoxLayout \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qboxlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlayoutitem.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qgridlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QTextEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextcursor.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextformat.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qpen.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QPushButton \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qpushbutton.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractbutton.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qlistwidget.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qlistview.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemview.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qabstractitemmodel.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qitemselectionmodel.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemdelegate.h \
@@ -1567,29 +1692,11 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMessageBox \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qmessagebox.h \
 		../../privatechatwindow.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QVBoxLayout \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qboxlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlayoutitem.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qgridlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QTextEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextcursor.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextformat.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qpen.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QPushButton \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qpushbutton.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractbutton.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qlistwidget.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qlistview.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemview.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qabstractitemmodel.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qitemselectionmodel.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemdelegate.h \
@@ -1613,16 +1720,28 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qinputmethod.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QLabel \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qlabel.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextcursor.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextformat.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qpen.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QListWidget \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMenuBar \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qmenubar.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qmenu.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qaction.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qactiongroup.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QPushButton \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qpushbutton.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractbutton.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QStatusBar \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qstatusbar.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QTextBrowser \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtextbrowser.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
 		/usr/local/Qt-5.15.2/include/QtCore/QSettings \
 		/usr/local/Qt-5.15.2/include/QtCore/qsettings.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
@@ -1732,31 +1851,44 @@ privatechatwindow.o: ../../privatechatwindow.cpp ../../privatechatwindow.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qfiledevice.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qvector2d.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtouchdevice.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QVBoxLayout \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qboxlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlayoutitem.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qgridlayout.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QTextEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
+		ui_privatechatwindow.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QVariant \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QApplication \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qapplication.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcoreapplication.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qeventloop.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qdesktopwidget.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qguiapplication.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qinputmethod.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtextcursor.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtextformat.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qpen.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QPushButton \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qpushbutton.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractbutton.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qicon.h
+		/usr/local/Qt-5.15.2/include/QtGui/qicon.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QTextBrowser \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qtextbrowser.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QTime \
+		/usr/local/Qt-5.15.2/include/QtCore/qdatetime.h \
+		/usr/local/Qt-5.15.2/include/QtGui/QKeyEvent \
+		../../filter.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QObject \
+		/usr/local/Qt-5.15.2/include/QtCore/QEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o privatechatwindow.o ../../privatechatwindow.cpp
 
 moc_auth_window.o: moc_auth_window.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_auth_window.o moc_auth_window.cpp
+
+moc_filter.o: moc_filter.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_filter.o moc_filter.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
