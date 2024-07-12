@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[6];
-    char stringdata0[100];
+    QByteArrayData data[9];
+    char stringdata0[136];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,12 +37,16 @@ QT_MOC_LITERAL(1, 11, 23), // "on_pushButton_2_clicked"
 QT_MOC_LITERAL(2, 35, 0), // ""
 QT_MOC_LITERAL(3, 36, 25), // "on_lineEdit_returnPressed"
 QT_MOC_LITERAL(4, 62, 23), // "on_onlineButton_clicked"
-QT_MOC_LITERAL(5, 86, 13) // "slotReadyRead"
+QT_MOC_LITERAL(5, 86, 20), // "handlePrivateMessage"
+QT_MOC_LITERAL(6, 107, 6), // "toUser"
+QT_MOC_LITERAL(7, 114, 7), // "message"
+QT_MOC_LITERAL(8, 122, 13) // "slotReadyRead"
 
     },
     "MainWindow\0on_pushButton_2_clicked\0\0"
     "on_lineEdit_returnPressed\0"
-    "on_onlineButton_clicked\0slotReadyRead"
+    "on_onlineButton_clicked\0handlePrivateMessage\0"
+    "toUser\0message\0slotReadyRead"
 };
 #undef QT_MOC_LITERAL
 
@@ -52,7 +56,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,15 +64,17 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x08 /* Private */,
-       3,    0,   35,    2, 0x08 /* Private */,
-       4,    0,   36,    2, 0x08 /* Private */,
-       5,    0,   37,    2, 0x0a /* Public */,
+       1,    0,   39,    2, 0x08 /* Private */,
+       3,    0,   40,    2, 0x08 /* Private */,
+       4,    0,   41,    2, 0x08 /* Private */,
+       5,    2,   42,    2, 0x08 /* Private */,
+       8,    0,   47,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    6,    7,
     QMetaType::Void,
 
        0        // eod
@@ -83,11 +89,11 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->on_pushButton_2_clicked(); break;
         case 1: _t->on_lineEdit_returnPressed(); break;
         case 2: _t->on_onlineButton_clicked(); break;
-        case 3: _t->slotReadyRead(); break;
+        case 3: _t->handlePrivateMessage((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 4: _t->slotReadyRead(); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = { {
@@ -119,13 +125,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

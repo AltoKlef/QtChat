@@ -1,23 +1,32 @@
+#ifndef PRIVATECHATWINDOW_H
+#define PRIVATECHATWINDOW_H
 
-#include <QWidget>
-#include <QVBoxLayout>
-#include <QTextEdit>
-#include <QLineEdit>
-#include <QPushButton>
+#include <QDialog>
 
-class PrivateChatWindow : public QWidget
+namespace Ui {
+class PrivateChatWindow;
+}
+
+class PrivateChatWindow : public QDialog
 {
     Q_OBJECT
 
 public:
     explicit PrivateChatWindow(const QString &userName, QWidget *parent = nullptr);
+    ~PrivateChatWindow();
+    void appendMessage(const QString &message);
+    void closeEvent(QCloseEvent *event);
+signals:
+    void sendMessage(const QString &toUser, const QString &message);
 
 private slots:
-    void sendMessage();
+    void on_sendButton_clicked();
 
 private:
+    Ui::PrivateChatWindow *ui;
     QString userName;
-    QTextEdit *chatDisplay;
-    QLineEdit *messageInput;
-    QPushButton *sendButton;
+    void onWindowClosed();
+
 };
+
+#endif // PRIVATECHATWINDOW_H

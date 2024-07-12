@@ -1,36 +1,42 @@
-// PrivateChatWindow.cpp
 #include "privatechatwindow.h"
-
-PrivateChatWindow::PrivateChatWindow(const QString &userName, QWidget *parent)
-    : QWidget(parent), userName(userName)
+#include "ui_privatechatwindow.h"
+#include "QTime"
+PrivateChatWindow::PrivateChatWindow(const QString &username, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PrivateChatWindow)
 {
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    ui->setupUi(this);
+    setWindowTitle("Private Chat with " + username);
+    userName=username;
 
-    chatDisplay = new QTextEdit(this);
-    chatDisplay->setReadOnly(true);
-
-    messageInput = new QLineEdit(this);
-    sendButton = new QPushButton("Send", this);
-
-    layout->addWidget(chatDisplay);
-    layout->addWidget(messageInput);
-    layout->addWidget(sendButton);
-
-    setLayout(layout);
-
-    connect(sendButton, &QPushButton::clicked, this, &PrivateChatWindow::sendMessage);
 }
 
-void PrivateChatWindow::sendMessage()
+PrivateChatWindow::~PrivateChatWindow()
 {
-    QString message = messageInput->text();
+    delete ui;
+}
+
+void PrivateChatWindow::on_sendButton_clicked()
+{
+    QString message = ui->messageLineEdit->text();
     if (!message.isEmpty()) {
-        // Добавить сообщение в окно чата
-        chatDisplay->append("Me: " + message);
-
-        // Отправить сообщение пользователю (реализация зависит от вашей логики)
-        // ...
-
-        messageInput->clear();
+        emit sendMessage(userName, message);
+        appendMessage("|"+QTime::currentTime().toString()+"| "+"Me: " + message);
+        ui->messageLineEdit->clear();
     }
+}
+
+void PrivateChatWindow::appendMessage(const QString &message)
+{
+    ui->chat->append(message);
+}
+
+void PrivateChatWindow::onWindowClosed()
+{
+    emit sendMessage(userName, userName+" has closed the chat window.");
+}
+void PrivateChatWindow::closeEvent(QCloseEvent *event)
+{
+    onWindowClosed();
+    QDialog::closeEvent(event);
 }

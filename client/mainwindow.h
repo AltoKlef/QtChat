@@ -25,6 +25,7 @@ private slots:
     void on_pushButton_2_clicked();
     void on_lineEdit_returnPressed();
     void on_onlineButton_clicked();
+    void handlePrivateMessage(const QString &toUser, const QString &message);
 
 private:
     Ui::MainWindow *ui;
@@ -41,9 +42,12 @@ private:
     void updateOnlineUsers(const QStringList &userList);
     void handleError(QAbstractSocket::SocketError socketError);
     void onConnected();
-    void createSocket();
     void handleDisconnection();
-    void openChatWindow(QListWidgetItem *item);
+    void removeChatWindow(const QString &userName);
+
+    QMap<QString, PrivateChatWindow*> chatWindows;
+    void openChatWindow(QString username);
+    void chatClicked(QListWidgetItem *item);
 public slots:
     void slotReadyRead();
 };

@@ -953,13 +953,49 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMessageBox \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qmessagebox.h \
+		../../privatechatwindow.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QVBoxLayout \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qboxlayout.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlayout.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlayoutitem.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qgridlayout.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QTextEdit \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextcursor.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextformat.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qpen.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QPushButton \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qpushbutton.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractbutton.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlistwidget.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlistview.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemview.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qabstractitemmodel.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qitemselectionmodel.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemdelegate.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qstyleoption.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractspinbox.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qvalidator.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qregularexpression.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qslider.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractslider.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qstyle.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qtabbar.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qrubberband.h \
 		moc_predefs.h \
 		/usr/local/Qt-5.15.2/bin/moc
 	/usr/local/Qt-5.15.2/bin/moc $(DEFINES) --include /home/alto/QtProjects/QtChat/client/build/Right-Debug/moc_predefs.h -I/usr/local/Qt-5.15.2/mkspecs/linux-g++ -I/home/alto/QtProjects/QtChat/client -I/usr/local/Qt-5.15.2/include -I/usr/local/Qt-5.15.2/include/QtWidgets -I/usr/local/Qt-5.15.2/include/QtGui -I/usr/local/Qt-5.15.2/include/QtNetwork -I/usr/local/Qt-5.15.2/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
 
 moc_privatechatwindow.cpp: ../../privatechatwindow.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qwidget.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QDialog \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtwidgetsglobal.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtguiglobal.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qglobal.h \
@@ -985,6 +1021,7 @@ moc_privatechatwindow.cpp: ../../privatechatwindow.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qversiontagging.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtgui-config.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtwidgets-config.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qwidget.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qwindowdefs.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qobjectdefs.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qnamespace.h \
@@ -1061,6 +1098,7 @@ moc_privatechatwindow.cpp: ../../privatechatwindow.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qfiledevice.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qvector2d.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtouchdevice.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QVBoxLayout \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qboxlayout.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qlayout.h \
@@ -1364,6 +1402,42 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMessageBox \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qmessagebox.h \
+		../../privatechatwindow.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QVBoxLayout \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qboxlayout.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlayout.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlayoutitem.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qgridlayout.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QTextEdit \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextcursor.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextformat.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qpen.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QPushButton \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qpushbutton.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractbutton.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlistwidget.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlistview.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemview.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qabstractitemmodel.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qitemselectionmodel.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemdelegate.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qstyleoption.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractspinbox.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qvalidator.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qregularexpression.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qslider.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractslider.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qstyle.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qtabbar.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qrubberband.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QApplication \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qapplication.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qcoreapplication.h \
@@ -1492,29 +1566,30 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMessageBox \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qmessagebox.h \
-		ui_mainwindow.h \
-		/usr/local/Qt-5.15.2/include/QtCore/QVariant \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QApplication \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qapplication.h \
-		/usr/local/Qt-5.15.2/include/QtCore/qcoreapplication.h \
-		/usr/local/Qt-5.15.2/include/QtCore/qeventloop.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qdesktopwidget.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qguiapplication.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qinputmethod.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QLabel \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlabel.h \
+		../../privatechatwindow.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QVBoxLayout \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qboxlayout.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlayout.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlayoutitem.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qgridlayout.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QTextEdit \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qframe.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtextcursor.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtextformat.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qpen.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextoption.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QListWidget \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QLineEdit \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlineedit.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QPushButton \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qpushbutton.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractbutton.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qlistwidget.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qlistview.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemview.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractscrollarea.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qabstractitemmodel.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qitemselectionmodel.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractitemdelegate.h \
@@ -1527,28 +1602,34 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qstyle.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtabbar.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qrubberband.h \
+		ui_mainwindow.h \
+		/usr/local/Qt-5.15.2/include/QtCore/QVariant \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QApplication \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qapplication.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qcoreapplication.h \
+		/usr/local/Qt-5.15.2/include/QtCore/qeventloop.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qdesktopwidget.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qguiapplication.h \
+		/usr/local/Qt-5.15.2/include/QtGui/qinputmethod.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QLabel \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qlabel.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QListWidget \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QMenuBar \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qmenubar.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qmenu.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qaction.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qactiongroup.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QPushButton \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qpushbutton.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qabstractbutton.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QStatusBar \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qstatusbar.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QTextBrowser \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtextbrowser.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qtextedit.h \
-		/usr/local/Qt-5.15.2/include/QtGui/qtextdocument.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
 		/usr/local/Qt-5.15.2/include/QtCore/QSettings \
 		/usr/local/Qt-5.15.2/include/QtCore/qsettings.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 
 privatechatwindow.o: ../../privatechatwindow.cpp ../../privatechatwindow.h \
-		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
-		/usr/local/Qt-5.15.2/include/QtWidgets/qwidget.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QDialog \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qdialog.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtwidgetsglobal.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtguiglobal.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qglobal.h \
@@ -1574,6 +1655,7 @@ privatechatwindow.o: ../../privatechatwindow.cpp ../../privatechatwindow.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qversiontagging.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtgui-config.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qtwidgets-config.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/qwidget.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qwindowdefs.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qobjectdefs.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qnamespace.h \
@@ -1650,6 +1732,7 @@ privatechatwindow.o: ../../privatechatwindow.cpp ../../privatechatwindow.h \
 		/usr/local/Qt-5.15.2/include/QtCore/qfiledevice.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qvector2d.h \
 		/usr/local/Qt-5.15.2/include/QtGui/qtouchdevice.h \
+		/usr/local/Qt-5.15.2/include/QtWidgets/QWidget \
 		/usr/local/Qt-5.15.2/include/QtWidgets/QVBoxLayout \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qboxlayout.h \
 		/usr/local/Qt-5.15.2/include/QtWidgets/qlayout.h \

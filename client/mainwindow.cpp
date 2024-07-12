@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include <QSettings>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,7 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&auth, &auth_window::authClicked, this, &MainWindow::authorizeUser);
     connect(socket, &QTcpSocket::errorOccurred, this, &MainWindow::handleError);
     connect(socket, &QTcpSocket::connected, this, &MainWindow::onConnected);
-    connect(ui->userList, &QListWidget::itemClicked, this, &MainWindow::openChatWindow);
+    connect(ui->userList, &QListWidget::itemClicked, this, &MainWindow::chatClicked);
+
     nextBlockSize = 0;
     isConnected = false;
 }
@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    qDeleteAll(chatWindows); // Удалить все окна чатов
 }
 
 void MainWindow::display()
@@ -73,24 +74,7 @@ void MainWindow::slotReadyRead() {
     }
 }
 
-void MainWindow::processResponse(const QString &command, const QString &data) {
-    if (command == "AUTH_SUCCESS") {
-        auth.hide();
-        this->show();
-        ui->textBrowser->append(data);
-        qDebug() << "Authorized";
-    } else if (command == "AUTH_FAIL") {
-        qDebug() << "Not authorized";
-        auth.wrongLogin();
-    } else if (command == "MESSAGE") {
-        ui->textBrowser->append(data);
-    } else if (command == "UPDATE_USERS") {
-        QStringList userList = data.split(',');
-        updateOnlineUsers(userList);
-    } else {
-        qDebug() << "Unknown command";
-    }
-}
+
 
 void MainWindow::SendToServer(const QString &command, const QString &data) {
     QByteArray packet;
@@ -100,6 +84,41 @@ void MainWindow::SendToServer(const QString &command, const QString &data) {
     out.device()->seek(0);
     out << quint16(packet.size() - sizeof(quint16));
     socket->write(packet);
+}
+void MainWindow::processResponse(const QString &command, const QString &data)
+{
+    if (command == "AUTH_SUCCESS") {
+        auth.hide();
+        MainWindow::show();
+        ui->textBrowser->append(data);
+        qDebug() << "Autorised";
+    } else if (command == "AUTH_FAIL") {
+        qDebug() << "not authorised";
+        auth.wrongLogin();
+    } else if (command == "MESSAGE") {
+        ui->textBrowser->append(data);
+    } else if (command == "PRIVATE_MESSAGE") {
+        qDebug()<<"private";
+        QStringList parts = data.split("~");
+        if (parts.size() == 3) {
+            QString time = parts[0];
+            QString fromUser = parts[1];
+            QString message=parts[2];
+            if(chatWindows.contains(fromUser)){
+                chatWindows[fromUser]->appendMessage("|"+time+ "|  "+fromUser +": " + message);
+            }
+            else{
+                openChatWindow(fromUser);
+                chatWindows[fromUser]->appendMessage("|"+time+ "|  "+fromUser +": " + message);
+            }
+
+        }
+    } else if (command == "UPDATE_USERS") {
+        QStringList userList = data.split(',');
+        updateOnlineUsers(userList);
+    } else {
+        qDebug() << "Unknown command";
+    }
 }
 
 void MainWindow::connectToServer(){
@@ -140,6 +159,7 @@ void MainWindow::handleError(QAbstractSocket::SocketError socketError)
         socket->disconnectFromHost();
         this->hide();
         auth.show();
+        auth.raise();
         break;
     default:
         errorMessage = socket->errorString();
@@ -185,12 +205,32 @@ void MainWindow::on_onlineButton_clicked()
     SendToServer("ONLINE", username);
 }
 
-void MainWindow::openChatWindow(QListWidgetItem *item)
+void MainWindow::openChatWindow(QString userName)
 {
-    QString userName = item->text();
-    //QMessageBox::information(this, "Private Chat", "Open chat with " + userName);
+    if (chatWindows.contains(userName)) {
+        PrivateChatWindow *chatWindow = chatWindows[userName];
+        chatWindow->show();
+        chatWindow->raise(); // Поднять окно на передний план
+    } else {
+        qDebug()<<userName;
+        PrivateChatWindow *chatWindow = new PrivateChatWindow(userName, this);
+        chatWindows.insert(userName, chatWindow);
+        connect(chatWindow, &PrivateChatWindow::sendMessage, this, &MainWindow::handlePrivateMessage);
+        chatWindow->show();
+    }
+}
 
-    // Здесь можно создать и открыть новое окно для личных сообщений
-    PrivateChatWindow *chatWindow = new PrivateChatWindow(userName, this);
-    chatWindow->show();
+void MainWindow::removeChatWindow(const QString &userName)
+{
+    if (chatWindows.contains(userName)) {
+        PrivateChatWindow *chatWindow = chatWindows[userName];
+        delete chatWindow;
+    }
+}
+void MainWindow::handlePrivateMessage(const QString &toUser, const QString &message)
+{
+    SendToServer("PRIVATE_MESSAGE", toUser+"~"+message);
+}
+void MainWindow::chatClicked(QListWidgetItem *item){
+    openChatWindow(item->text());
 }
