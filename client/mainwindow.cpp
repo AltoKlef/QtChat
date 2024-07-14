@@ -18,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent)
     nextBlockSize = 0;
     isConnected = false;
 }
-
 MainWindow::~MainWindow()
 {
     if (socket->state() == QAbstractSocket::ConnectedState) {
@@ -29,9 +28,32 @@ MainWindow::~MainWindow()
     qDeleteAll(chatWindows);
 }
 
-void MainWindow::display()
+
+
+
+//связь с сервером
+
+void MainWindow::authorizeUser()
 {
-    auth.show();
+    qDebug() << auth.getLogin();
+    qDebug() << "isConnected: " << isConnected;
+    if (!isConnected) {
+        connectToServer();
+    } else {
+        SendToServer("AUTH", auth.getLogin());
+    }
+}
+
+
+void MainWindow::connectToServer(){
+    if (socket->state() == QAbstractSocket::UnconnectedState) {
+        qDebug() << "Reconnecting";
+        QSettings settings(":/con/config.ini", QSettings::IniFormat);
+        QString ip = settings.value("Server/IP").toString();
+        int port = settings.value("Server/Port").toInt();
+        qDebug()<<ip<<"   "<<port;
+        socket->connectToHost(ip, port);
+    }
 }
 
 void MainWindow::onConnected()
@@ -77,7 +99,10 @@ void MainWindow::slotReadyRead() {
         processResponse(command, data);
     }
 }
-
+void MainWindow::handlePrivateMessage(const QString &toUser, const QString &message)
+{
+    SendToServer("PRIVATE_MESSAGE", toUser+"~"+message);
+}
 
 
 void MainWindow::SendToServer(const QString &command, const QString &data) {
@@ -89,6 +114,46 @@ void MainWindow::SendToServer(const QString &command, const QString &data) {
     out << quint16(packet.size() - sizeof(quint16));
     socket->write(packet);
 }
+
+
+
+
+
+
+//обработка ошибок и команд сервера
+void MainWindow::handleError(QAbstractSocket::SocketError socketError)
+{
+    QString errorMessage;
+
+    switch (socketError) {
+    case QAbstractSocket::HostNotFoundError:
+        errorMessage = "The host was not found.";
+        break;
+    case QAbstractSocket::ConnectionRefusedError:
+        errorMessage = "The connection was refused by the peer.";
+        break;
+    case QAbstractSocket::RemoteHostClosedError:
+        errorMessage = "The remote host closed the connection.";
+        socket->disconnectFromHost();
+        this->hide();
+        auth.show();
+        auth.raise();
+        break;
+    default:
+        errorMessage = socket->errorString();
+    }
+    qDebug() << errorMessage;
+    isConnected = false;
+    QMessageBox::critical(this, "Connection Error", errorMessage);
+}
+
+void MainWindow::handleDisconnection() {
+    isConnected = false;
+    qDebug() << "Disconnected from server";
+    this->hide();
+    auth.show();
+}
+
 void MainWindow::processResponse(const QString &command, const QString &data)
 {
     if (command == "AUTH_SUCCESS") {
@@ -125,60 +190,17 @@ void MainWindow::processResponse(const QString &command, const QString &data)
     }
 }
 
-void MainWindow::connectToServer(){
-    if (socket->state() == QAbstractSocket::UnconnectedState) {
-        qDebug() << "Reconnecting";
-        QSettings settings("config.ini", QSettings::IniFormat);
-        QString ip = settings.value("Server/IP").toString();
-        int port = settings.value("Server/Port").toInt();
-        qDebug()<<ip<<"   "<<port;
-        socket->connectToHost(ip, port);
-    }
-}
 
-void MainWindow::authorizeUser()
+
+
+//интерфейс
+void MainWindow::display()
 {
-    qDebug() << auth.getLogin();
-    qDebug() << "isConnected: " << isConnected;
-    if (!isConnected) {
-        connectToServer();
-    } else {
-        SendToServer("AUTH", auth.getLogin());
-    }
-}
-
-void MainWindow::handleError(QAbstractSocket::SocketError socketError)
-{
-    QString errorMessage;
-
-    switch (socketError) {
-    case QAbstractSocket::HostNotFoundError:
-        errorMessage = "The host was not found.";
-        break;
-    case QAbstractSocket::ConnectionRefusedError:
-        errorMessage = "The connection was refused by the peer.";
-        break;
-    case QAbstractSocket::RemoteHostClosedError:
-        errorMessage = "The remote host closed the connection.";
-        socket->disconnectFromHost();
-        this->hide();
-        auth.show();
-        auth.raise();
-        break;
-    default:
-        errorMessage = socket->errorString();
-    }
-    qDebug() << errorMessage;
-    isConnected = false;
-    QMessageBox::critical(this, "Connection Error", errorMessage);
-    //auth.connectionError(errorMessage);
-}
-
-void MainWindow::handleDisconnection() {
-    isConnected = false;
-    qDebug() << "Disconnected from server";
-    this->hide();
     auth.show();
+}
+
+void MainWindow::chatClicked(QListWidgetItem *item){
+    openChatWindow(item->text());
 }
 
 void MainWindow::on_lineEdit_returnPressed()
@@ -199,7 +221,28 @@ void MainWindow::on_onlineButton_clicked()
 {
     SendToServer("ONLINE", username);
 }
+void MainWindow::on_sendButton_clicked()
+{
+    if (ui->lineEdit->text().isEmpty()) {
+        return;
+    }
+    SendToServer("MESSAGE", ui->lineEdit->text());
+    ui->lineEdit->clear();
+}
+void MainWindow::on_exitButton_clicked()
+{
+    if (socket->state() == QAbstractSocket::ConnectedState) {
+        socket->disconnectFromHost();
+        socket->waitForDisconnected();
+    }
+    qApp->quit();
+}
 
+
+
+
+
+//окно личных сообщений
 void MainWindow::openChatWindow(QString userName)
 {
     if (chatWindows.contains(userName)) {
@@ -218,37 +261,9 @@ void MainWindow::openChatWindow(QString userName)
 void MainWindow::removeChatWindow(const QString &userName)
 {
     if (chatWindows.contains(userName)) {
-        PrivateChatWindow *chatWindow = chatWindows[userName];
-        delete chatWindow;
+        delete chatWindows[userName];
     }
 }
-void MainWindow::handlePrivateMessage(const QString &toUser, const QString &message)
-{
-    SendToServer("PRIVATE_MESSAGE", toUser+"~"+message);
-}
-void MainWindow::chatClicked(QListWidgetItem *item){
-    openChatWindow(item->text());
-}
 
 
-
-
-void MainWindow::on_sendButton_clicked()
-{
-    if (ui->lineEdit->text().isEmpty()) {
-        return;
-    }
-    SendToServer("MESSAGE", ui->lineEdit->text());
-    ui->lineEdit->clear();
-}
-
-
-void MainWindow::on_exitButton_clicked()
-{
-    if (socket->state() == QAbstractSocket::ConnectedState) {
-        socket->disconnectFromHost();
-        socket->waitForDisconnected();
-    }
-    qApp->quit();
-}
 

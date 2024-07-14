@@ -7,12 +7,16 @@ auth_window::auth_window(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("Hello window");
+    NoTildeFilter *filter = new NoTildeFilter;
+    ui->logLineEdit->installEventFilter(filter);
 }
 
 auth_window::~auth_window()
 {
     delete ui;
 }
+
+
 
 QString auth_window::getLogin()
 {

@@ -19,3 +19,6 @@ HEADERS += \
 
 DISTFILES += \
     config.ini
+
+RESOURCES += \
+    configs.qrc

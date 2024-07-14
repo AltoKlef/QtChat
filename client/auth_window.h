@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QMessageBox>
+#include "filter.h"
 namespace Ui {
 class auth_window;
 }

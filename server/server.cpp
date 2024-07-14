@@ -1,34 +1,68 @@
+/**
+ * @file server.cpp
+ * @brief Реализация класса Server и связанных с ним функций.
+ */
+
 #include "server.h"
 #include <QDebug>
-#include <QTcpSocket>
 #include <QDataStream>
 #include <QTime>
+#include <QSettings>
+#include <QTextStream>
+#include <QCoreApplication>
+
+/**
+ * @brief Конструктор класса Server.
+ * Инициализирует сервер, читая конфигурацию и начиная прослушивание на указанном порту.
+ */
 Server::Server() {
-    if (this->listen(QHostAddress::Any, 2323)) {
-        qDebug() << "Server started";
+    QSettings settings(":/con/config.ini", QSettings::IniFormat);
+    int port = settings.value("Server/Port").toInt();
+    qDebug() << "port:" << port;
+    if (this->listen(QHostAddress::Any, port)) {
+        qDebug() << "Сервер запущен";
     } else {
-        qDebug() << "Server start error";
+        qDebug() << "Ошибка запуска сервера";
     }
     nextBlockSize = 0;
 }
 
+/**
+ * @brief Деструктор класса Server.
+ * Обеспечивает отключение всех клиентов и правильное закрытие сервера.
+ */
+Server::~Server() {
+    for (QTcpSocket *socket : clients) {
+        socket->disconnectFromHost();
+    }
+    close();
+}
+
+/**
+ * @brief Обрабатывает входящие соединения.
+ * Создает новый сокет для входящего соединения и подключает сигналы для чтения данных и отключения клиента.
+ * @param socketDescriptor Дескриптор сокета для входящего соединения.
+ */
 void Server::incomingConnection(qintptr socketDescriptor) {
     QTcpSocket *socket = new QTcpSocket;
     if (socket->setSocketDescriptor(socketDescriptor)) {
         connect(socket, &QTcpSocket::readyRead, this, &Server::slotReadyRead);
         connect(socket, &QTcpSocket::disconnected, this, &Server::slotClientDisconnected);
-
-        qDebug() << "Client connected:" << socketDescriptor;
+        qDebug() << "Клиент подключен:" << socketDescriptor;
     } else {
         delete socket;
-        qDebug() << "Error in incomingConnection";
+        qDebug() << "Ошибка в incomingConnection";
     }
 }
 
+/**
+ * @brief Слот для обработки сигнала readyRead от клиентского сокета.
+ * Считывает данные из сокета, обрабатывает команды и осуществляет связь с клиентом.
+ */
 void Server::slotReadyRead() {
     QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
     if (!socket) {
-        qDebug() << "Error casting sender to QTcpSocket";
+        qDebug() << "Ошибка приведения sender к QTcpSocket";
         return;
     }
 
@@ -45,7 +79,6 @@ void Server::slotReadyRead() {
                 in.rollbackTransaction();
                 break;
             }
-
             in >> nextBlockSize;
         }
 
@@ -57,7 +90,7 @@ void Server::slotReadyRead() {
         in >> command >> data;
         qDebug() << command << "data:" << data;
         if (!in.commitTransaction()) {
-            qDebug() << "Data not fully available yet";
+            qDebug() << "Данные еще не полностью доступны";
             break;
         }
 
@@ -66,25 +99,12 @@ void Server::slotReadyRead() {
     }
 }
 
-void Server::handleAuth(const QString &data, QTcpSocket *socket) {
-    QString login = data;
-    if (!clients.contains(login)) {
-        clients[login] = socket;
-        qDebug() << "User authorized:" << login;
-        SendToClient(socket, "AUTH_SUCCESS", "Welcome " + login);
-        updateAllClientsUserList();
-    } else {
-        qDebug() << "Authorization failed for user:" << login;
-        SendToClient(socket, "AUTH_FAIL", "Login already in use");
-    }
-}
-
-void Server::handleMessage(const QString &data, const QString &login) {
-    QString message = QString("%1 %2: %3").arg(QTime::currentTime().toString(), login, data);
-    qDebug() << "Broadcasting message:" << message;
-    SendToAllClients("MESSAGE", message);
-}
-
+/**
+ * @brief Отправляет сообщение конкретному клиенту.
+ * @param socket Сокет клиента для отправки сообщения.
+ * @param command Команда для отправки.
+ * @param message Сообщение для отправки.
+ */
 void Server::SendToClient(QTcpSocket *socket, const QString &command, const QString &message) {
     QByteArray data;
     QDataStream out(&data, QIODevice::WriteOnly);
@@ -95,6 +115,11 @@ void Server::SendToClient(QTcpSocket *socket, const QString &command, const QStr
     socket->write(data);
 }
 
+/**
+ * @brief Отправляет сообщение всем подключенным клиентам.
+ * @param command Команда для отправки.
+ * @param message Сообщение для отправки.
+ */
 void Server::SendToAllClients(const QString &command, const QString &message) {
     QByteArray data;
     QDataStream out(&data, QIODevice::WriteOnly);
@@ -107,6 +132,10 @@ void Server::SendToAllClients(const QString &command, const QString &message) {
     }
 }
 
+/**
+ * @brief Слот для обработки отключения клиента.
+ * Удаляет клиента из списка подключенных клиентов и обновляет список пользователей для всех клиентов.
+ */
 void Server::slotClientDisconnected() {
     QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
     if (socket) {
@@ -119,27 +148,62 @@ void Server::slotClientDisconnected() {
         }
         clients.remove(user);
         socket->deleteLater();
-        qDebug() << "Client disconnected:" << user;
+        qDebug() << "Клиент отключен:" << user;
         updateAllClientsUserList();
     }
 }
 
-void Server::updateAllClientsUserList() {
-    QStringList userList = clients.keys();
-    QString userListString = userList.join(',');
-
-    for (QTcpSocket *client : clients.values()) {
-        SendToClient(client, "UPDATE_USERS", userListString);
+/**
+ * @brief Обрабатывает аутентификацию клиента.
+ * Проверяет, используется ли уже логин, и отправляет соответствующий ответ клиенту.
+ * @param data Данные логина, отправленные клиентом.
+ * @param socket Сокет клиента.
+ */
+void Server::handleAuth(const QString &data, QTcpSocket *socket) {
+    QString login = data;
+    if (!clients.contains(login)) {
+        clients[login] = socket;
+        qDebug() << "Пользователь авторизован:" << login;
+        SendToClient(socket, "AUTH_SUCCESS", "Добро пожаловать " + login);
+        updateAllClientsUserList();
+    } else {
+        qDebug() << "Ошибка авторизации для пользователя:" << login;
+        SendToClient(socket, "AUTH_FAIL", "Логин уже используется");
     }
 }
 
-void Server::UpdateUserList(QTcpSocket *socket) {
-    QStringList userList = clients.keys();
-    QString userListString = userList.join(',');
-    qDebug() << "User list updated";
-    SendToClient(socket, "UPDATE_USERS", userListString);
+/**
+ * @brief Обрабатывает рассылку сообщений от клиента.
+ * @param data Данные сообщения, отправленные клиентом.
+ * @param login Логин клиента, отправившего сообщение.
+ */
+void Server::handleMessage(const QString &data, const QString &login) {
+    QString message = QString("%1 %2: %3").arg(QTime::currentTime().toString(), login, data);
+    qDebug() << "Рассылка сообщения:" << message;
+    SendToAllClients("MESSAGE", message);
 }
 
+/**
+ * @brief Обрабатывает личные сообщения между клиентами.
+ * @param toUser Получатель личного сообщения.
+ * @param message Содержание личного сообщения.
+ * @param fromUser Отправитель личного сообщения.
+ */
+void Server::handlePrivateMessage(const QString &toUser, const QString &message, const QString &fromUser) {
+    if (clients.contains(toUser)) {
+        QTcpSocket *toSocket = clients[toUser];
+        SendToClient(toSocket, "PRIVATE_MESSAGE", QTime::currentTime().toString() + "~" + fromUser + "~" + message);
+        qDebug() << "Личное сообщение от" << fromUser << "для" << toUser << ":" << message;
+    }
+}
+
+/**
+ * @brief Обрабатывает команды, отправленные клиентом.
+ * Направляет команду в соответствующую функцию-обработчик в зависимости от типа команды.
+ * @param command Команда, отправленная клиентом.
+ * @param data Данные, связанные с командой.
+ * @param socket Сокет клиента.
+ */
 void Server::processCommand(const QString &command, const QString &data, QTcpSocket *socket) {
     if (command == "AUTH") {
         handleAuth(data, socket);
@@ -169,14 +233,32 @@ void Server::processCommand(const QString &command, const QString &data, QTcpSoc
     } else if (command == "ONLINE") {
         UpdateUserList(socket);
     } else {
-        qDebug() << "Unknown command";
+        qDebug() << "Неизвестная команда";
     }
 }
 
-void Server::handlePrivateMessage(const QString &toUser, const QString &message, const QString &fromUser) {
-    if (clients.contains(toUser)) {
-        QTcpSocket *toSocket = clients[toUser];
-        SendToClient(toSocket, "PRIVATE_MESSAGE", QTime::currentTime().toString() + "~" + fromUser + "~" + message);
-        qDebug() << "Private message from" << fromUser << "to" << toUser << ":" << message;
+/**
+ * @brief Обновляет список пользователей для всех подключенных клиентов.
+ * Отправляет обновленный список онлайн-пользователей всем клиентам.
+ */
+void Server::updateAllClientsUserList() {
+    QStringList userList = clients.keys();
+    QString userListString = userList.join(',');
+
+    for (QTcpSocket *client : clients.values()) {
+        SendToClient(client, "UPDATE_USERS", userListString);
     }
+}
+
+/**
+ * @brief Обновляет список пользователей для конкретного клиента.
+ * Отправляет обновленный список онлайн-пользователей указанному клиенту.
+ * @param socket Сокет клиента для отправки списка пользователей.
+```cpp
+ */
+void Server::UpdateUserList(QTcpSocket *socket) {
+    QStringList userList = clients.keys();
+    QString userListString = userList.join(',');
+    qDebug() << "Список пользователей обновлен";
+    SendToClient(socket, "UPDATE_USERS", userListString);
 }

@@ -16,21 +16,28 @@ PrivateChatWindow::PrivateChatWindow(const QString &username, QWidget *parent) :
 
 }
 
-
 PrivateChatWindow::~PrivateChatWindow()
 {
     delete ui;
 }
+
+
+
 
 void PrivateChatWindow::on_sendButton_clicked()
 {
     QString message = ui->messageLineEdit->text();
     if (!message.isEmpty()) {
         emit sendMessage(userName, message);
-        appendMessage("|"+QTime::currentTime().toString()+"| "+"Me: " + message);
+        appendMessage("|"+QTime::currentTime().toString()+"| "+" Me: " + message);
         ui->messageLineEdit->clear();
     }
 }
+
+
+
+
+
 
 void PrivateChatWindow::appendMessage(const QString &message)
 {
