@@ -1,0 +1,193 @@
+\doxysection{Класс Server}
+\hypertarget{classServer}{}\label{classServer}\index{Server@{Server}}
+Граф наследования\+:Server\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classServer}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classServer_ad5ec9462b520e59f7ea831e157ee5e59}\label{classServer_ad5ec9462b520e59f7ea831e157ee5e59} 
+{\bfseries Server} ()
+\begin{DoxyCompactList}\small\item\em Конструктор класса \doxylink{classServer}{Server}. Инициализирует сервер, читая конфигурацию и начиная прослушивание на указанном порту. \end{DoxyCompactList}\item 
+\Hypertarget{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}\label{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Server} ()
+\begin{DoxyCompactList}\small\item\em Деструктор класса \doxylink{classServer}{Server}. Обеспечивает отключение всех клиентов и правильное закрытие сервера. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Защищенные члены}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classServer_aa229a1587514197693274aa0d589344b}{incoming\+Connection}} (qintptr socket\+Descriptor) override
+\begin{DoxyCompactList}\small\item\em Обрабатывает входящие соединения. Создает новый сокет для входящего соединения и подключает сигналы для чтения данных и отключения клиента. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Закрытые слоты}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classServer_ad7f0bc4f93fa08a16565f7f22cc562c5}\label{classServer_ad7f0bc4f93fa08a16565f7f22cc562c5} 
+void {\bfseries slot\+Ready\+Read} ()
+\begin{DoxyCompactList}\small\item\em Слот для обработки сигнала ready\+Read от клиентского сокета. Считывает данные из сокета, обрабатывает команды и осуществляет связь с клиентом. \end{DoxyCompactList}\item 
+\Hypertarget{classServer_a3208d1572323ce63fd091ce9ed4ba21e}\label{classServer_a3208d1572323ce63fd091ce9ed4ba21e} 
+void {\bfseries slot\+Client\+Disconnected} ()
+\begin{DoxyCompactList}\small\item\em Слот для обработки отключения клиента. Удаляет клиента из списка подключенных клиентов и обновляет список пользователей для всех клиентов. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classServer_ad1d54e19f111fd6eed23080c8ee8fe26}{handle\+Auth}} (const QString \&data, QTcp\+Socket \texorpdfstring{$\ast$}{*}socket)
+\begin{DoxyCompactList}\small\item\em Обрабатывает аутентификацию клиента. Проверяет, используется ли уже логин, и отправляет соответствующий ответ клиенту. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classServer_a7fdc0629a1d57db239dda7d0496633fa}{handle\+Message}} (const QString \&data, const QString \&login)
+\begin{DoxyCompactList}\small\item\em Обрабатывает рассылку сообщений от клиента. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classServer_a0460e266c8dd990fca5560237961ac0c}{handle\+Private\+Message}} (const QString \&to\+User, const QString \&message, const QString \&from\+User)
+\begin{DoxyCompactList}\small\item\em Обрабатывает личные сообщения между клиентами. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classServer_aa85114b3ed0346bf3ccfb4d23a5edcaf}{Send\+To\+Client}} (QTcp\+Socket \texorpdfstring{$\ast$}{*}socket, const QString \&command, const QString \&message)
+\begin{DoxyCompactList}\small\item\em Отправляет сообщение конкретному клиенту. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classServer_a6f7500effcdaeadadc9fb9853dd8281b}{Send\+To\+All\+Clients}} (const QString \&command, const QString \&message)
+\begin{DoxyCompactList}\small\item\em Отправляет сообщение всем подключенным клиентам. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classServer_a2508b8329970c3b16693b838b359263c}{process\+Command}} (const QString \&command, const QString \&data, QTcp\+Socket \texorpdfstring{$\ast$}{*}socket)
+\begin{DoxyCompactList}\small\item\em Обрабатывает команды, отправленные клиентом. Направляет команду в соответствующую функцию-\/обработчик в зависимости от типа команды. \end{DoxyCompactList}\item 
+\Hypertarget{classServer_a0aafaf1d994145926426cb9ab2d50c35}\label{classServer_a0aafaf1d994145926426cb9ab2d50c35} 
+void {\bfseries update\+All\+Clients\+User\+List} ()
+\begin{DoxyCompactList}\small\item\em Обновляет список пользователей для всех подключенных клиентов. Отправляет обновленный список онлайн-\/пользователей всем клиентам. \end{DoxyCompactList}\item 
+\Hypertarget{classServer_a046262bcda88f31f1c8fcbc13616b2f7}\label{classServer_a046262bcda88f31f1c8fcbc13616b2f7} 
+void {\bfseries Update\+User\+List} (QTcp\+Socket \texorpdfstring{$\ast$}{*}socket)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Закрытые данные}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classServer_ac7a8cb417e807257f366ea30ca3833f9}\label{classServer_ac7a8cb417e807257f366ea30ca3833f9} 
+quint16 {\bfseries next\+Block\+Size}
+\item 
+\Hypertarget{classServer_a7eb84cbf27708dfa5f0927037998c3ca}\label{classServer_a7eb84cbf27708dfa5f0927037998c3ca} 
+QMap$<$ QString, QTcp\+Socket \texorpdfstring{$\ast$}{*} $>$ {\bfseries clients}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Методы}
+\Hypertarget{classServer_ad1d54e19f111fd6eed23080c8ee8fe26}\index{Server@{Server}!handleAuth@{handleAuth}}
+\index{handleAuth@{handleAuth}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{handleAuth()}{handleAuth()}}
+{\footnotesize\ttfamily \label{classServer_ad1d54e19f111fd6eed23080c8ee8fe26} 
+void Server\+::handle\+Auth (\begin{DoxyParamCaption}\item[{const QString \&}]{data}{, }\item[{QTcp\+Socket \texorpdfstring{$\ast$}{*}}]{socket}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Обрабатывает аутентификацию клиента. Проверяет, используется ли уже логин, и отправляет соответствующий ответ клиенту. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em data} & Данные логина, отправленные клиентом. \\
+\hline
+{\em socket} & Сокет клиента. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classServer_a7fdc0629a1d57db239dda7d0496633fa}\index{Server@{Server}!handleMessage@{handleMessage}}
+\index{handleMessage@{handleMessage}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{handleMessage()}{handleMessage()}}
+{\footnotesize\ttfamily \label{classServer_a7fdc0629a1d57db239dda7d0496633fa} 
+void Server\+::handle\+Message (\begin{DoxyParamCaption}\item[{const QString \&}]{data}{, }\item[{const QString \&}]{login}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Обрабатывает рассылку сообщений от клиента. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em data} & Данные сообщения, отправленные клиентом. \\
+\hline
+{\em login} & Логин клиента, отправившего сообщение. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classServer_a0460e266c8dd990fca5560237961ac0c}\index{Server@{Server}!handlePrivateMessage@{handlePrivateMessage}}
+\index{handlePrivateMessage@{handlePrivateMessage}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{handlePrivateMessage()}{handlePrivateMessage()}}
+{\footnotesize\ttfamily \label{classServer_a0460e266c8dd990fca5560237961ac0c} 
+void Server\+::handle\+Private\+Message (\begin{DoxyParamCaption}\item[{const QString \&}]{to\+User}{, }\item[{const QString \&}]{message}{, }\item[{const QString \&}]{from\+User}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Обрабатывает личные сообщения между клиентами. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em to\+User} & Получатель личного сообщения. \\
+\hline
+{\em message} & Содержание личного сообщения. \\
+\hline
+{\em from\+User} & Отправитель личного сообщения. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classServer_aa229a1587514197693274aa0d589344b}\index{Server@{Server}!incomingConnection@{incomingConnection}}
+\index{incomingConnection@{incomingConnection}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{incomingConnection()}{incomingConnection()}}
+{\footnotesize\ttfamily \label{classServer_aa229a1587514197693274aa0d589344b} 
+void Server\+::incoming\+Connection (\begin{DoxyParamCaption}\item[{qintptr}]{socket\+Descriptor}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Обрабатывает входящие соединения. Создает новый сокет для входящего соединения и подключает сигналы для чтения данных и отключения клиента. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em socket\+Descriptor} & Дескриптор сокета для входящего соединения. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classServer_a2508b8329970c3b16693b838b359263c}\index{Server@{Server}!processCommand@{processCommand}}
+\index{processCommand@{processCommand}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{processCommand()}{processCommand()}}
+{\footnotesize\ttfamily \label{classServer_a2508b8329970c3b16693b838b359263c} 
+void Server\+::process\+Command (\begin{DoxyParamCaption}\item[{const QString \&}]{command}{, }\item[{const QString \&}]{data}{, }\item[{QTcp\+Socket \texorpdfstring{$\ast$}{*}}]{socket}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Обрабатывает команды, отправленные клиентом. Направляет команду в соответствующую функцию-\/обработчик в зависимости от типа команды. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em command} & Команда, отправленная клиентом. \\
+\hline
+{\em data} & Данные, связанные с командой. \\
+\hline
+{\em socket} & Сокет клиента. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classServer_a6f7500effcdaeadadc9fb9853dd8281b}\index{Server@{Server}!SendToAllClients@{SendToAllClients}}
+\index{SendToAllClients@{SendToAllClients}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{SendToAllClients()}{SendToAllClients()}}
+{\footnotesize\ttfamily \label{classServer_a6f7500effcdaeadadc9fb9853dd8281b} 
+void Server\+::\+Send\+To\+All\+Clients (\begin{DoxyParamCaption}\item[{const QString \&}]{command}{, }\item[{const QString \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Отправляет сообщение всем подключенным клиентам. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em command} & Команда для отправки. \\
+\hline
+{\em message} & Сообщение для отправки. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classServer_aa85114b3ed0346bf3ccfb4d23a5edcaf}\index{Server@{Server}!SendToClient@{SendToClient}}
+\index{SendToClient@{SendToClient}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{SendToClient()}{SendToClient()}}
+{\footnotesize\ttfamily \label{classServer_aa85114b3ed0346bf3ccfb4d23a5edcaf} 
+void Server\+::\+Send\+To\+Client (\begin{DoxyParamCaption}\item[{QTcp\+Socket \texorpdfstring{$\ast$}{*}}]{socket}{, }\item[{const QString \&}]{command}{, }\item[{const QString \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Отправляет сообщение конкретному клиенту. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em socket} & Сокет клиента для отправки сообщения. \\
+\hline
+{\em command} & Команда для отправки. \\
+\hline
+{\em message} & Сообщение для отправки. \\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+server.\+h\item 
+\mbox{\hyperlink{server_8cpp}{server.\+cpp}}\end{DoxyCompactItemize}

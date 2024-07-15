@@ -1,0 +1,39 @@
+\doxysection{privatechatwindow.\+h}
+\hypertarget{privatechatwindow_8h_source}{}\label{privatechatwindow_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PRIVATECHATWINDOW\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PRIVATECHATWINDOW\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QDialog>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }Ui\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPrivateChatWindow}{PrivateChatWindow}};}
+\DoxyCodeLine{00008\ \}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPrivateChatWindow}{PrivateChatWindow}}\ :\ \textcolor{keyword}{public}\ QDialog}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classPrivateChatWindow_a2bca67e807d8600a8c754fb4ede256e0}{PrivateChatWindow}}(\textcolor{keyword}{const}\ QString\ \&userName,\ QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classPrivateChatWindow_a136e5469bdf71db206d372cd47898d6c}{\string~PrivateChatWindow}}();}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPrivateChatWindow_a5ee7ab6f845e7b180e084b69eb58f838}{appendMessage}}(\textcolor{keyword}{const}\ QString\ \&message);}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPrivateChatWindow_a55cfa18fc77d1416bd785dc0889ba3c4}{closeEvent}}(QCloseEvent\ *event);}
+\DoxyCodeLine{00019\ signals:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ sendMessage(\textcolor{keyword}{const}\ QString\ \&toUser,\ \textcolor{keyword}{const}\ QString\ \&message);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPrivateChatWindow_af7ca64b2d5c9bf9cea066b44ef88cfdf}{on\_sendButton\_clicked}}();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPrivateChatWindow_a9da18dfc39ed388a1361bd5020611e5c}{on\_exitButton\_clicked}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00028\ \ \ \ \ Ui::PrivateChatWindow\ *ui;}
+\DoxyCodeLine{00029\ \ \ \ \ QString\ userName;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPrivateChatWindow_af1132dd70d54e0e43ad125399eca725f}{onWindowClosed}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PRIVATECHATWINDOW\_H}}
+
+\end{DoxyCode}

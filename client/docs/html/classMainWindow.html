@@ -1,0 +1,534 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.11.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>client: Класс MainWindow</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">client
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-slots">Открытые слоты</a> &#124;
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pri-slots">Закрытые слоты</a> &#124;
+<a href="#pri-methods">Закрытые члены</a> &#124;
+<a href="#pri-attribs">Закрытые данные</a> &#124;
+<a href="classMainWindow-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс MainWindow</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Граф наследования:MainWindow:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classMainWindow.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-slots" name="pub-slots"></a>
+Открытые слоты</h2></td></tr>
+<tr class="memitem:aedfbe3a3ead6ab12276e84ad227630fd" id="r_aedfbe3a3ead6ab12276e84ad227630fd"><td class="memItemLeft" align="right" valign="top"><a id="aedfbe3a3ead6ab12276e84ad227630fd" name="aedfbe3a3ead6ab12276e84ad227630fd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>slotReadyRead</b> ()</td></tr>
+<tr class="memdesc:aedfbe3a3ead6ab12276e84ad227630fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработчик готовности чтения данных из сокета. <br /></td></tr>
+<tr class="separator:aedfbe3a3ead6ab12276e84ad227630fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a996c5a2b6f77944776856f08ec30858d" id="r_a996c5a2b6f77944776856f08ec30858d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a996c5a2b6f77944776856f08ec30858d">MainWindow</a> (QWidget *parent=nullptr)</td></tr>
+<tr class="memdesc:a996c5a2b6f77944776856f08ec30858d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор главного окна.  <br /></td></tr>
+<tr class="separator:a996c5a2b6f77944776856f08ec30858d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae98d00a93bc118200eeef9f9bba1dba7" id="r_ae98d00a93bc118200eeef9f9bba1dba7"><td class="memItemLeft" align="right" valign="top"><a id="ae98d00a93bc118200eeef9f9bba1dba7" name="ae98d00a93bc118200eeef9f9bba1dba7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>~MainWindow</b> ()</td></tr>
+<tr class="memdesc:ae98d00a93bc118200eeef9f9bba1dba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Деструктор главного окна. <br /></td></tr>
+<tr class="separator:ae98d00a93bc118200eeef9f9bba1dba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0083b949c18ccf71dcbe37f4258007c0" id="r_a0083b949c18ccf71dcbe37f4258007c0"><td class="memItemLeft" align="right" valign="top"><a id="a0083b949c18ccf71dcbe37f4258007c0" name="a0083b949c18ccf71dcbe37f4258007c0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>display</b> ()</td></tr>
+<tr class="memdesc:a0083b949c18ccf71dcbe37f4258007c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Отображение окна авторизации. <br /></td></tr>
+<tr class="separator:a0083b949c18ccf71dcbe37f4258007c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-slots" name="pri-slots"></a>
+Закрытые слоты</h2></td></tr>
+<tr class="memitem:a6ed67aa63c63c4867166cb21115d64f7" id="r_a6ed67aa63c63c4867166cb21115d64f7"><td class="memItemLeft" align="right" valign="top"><a id="a6ed67aa63c63c4867166cb21115d64f7" name="a6ed67aa63c63c4867166cb21115d64f7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>on_lineEdit_returnPressed</b> ()</td></tr>
+<tr class="memdesc:a6ed67aa63c63c4867166cb21115d64f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработчик нажатия клавиши Enter в поле ввода сообщения. <br /></td></tr>
+<tr class="separator:a6ed67aa63c63c4867166cb21115d64f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e6431e437794e50b2000e438df89f7a" id="r_a2e6431e437794e50b2000e438df89f7a"><td class="memItemLeft" align="right" valign="top"><a id="a2e6431e437794e50b2000e438df89f7a" name="a2e6431e437794e50b2000e438df89f7a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>on_onlineButton_clicked</b> ()</td></tr>
+<tr class="memdesc:a2e6431e437794e50b2000e438df89f7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработчик нажатия кнопки "Online". <br /></td></tr>
+<tr class="separator:a2e6431e437794e50b2000e438df89f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fe191d5a9d832a9d5b88ebe2c7fde86" id="r_a9fe191d5a9d832a9d5b88ebe2c7fde86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9fe191d5a9d832a9d5b88ebe2c7fde86">handlePrivateMessage</a> (const QString &amp;toUser, const QString &amp;message)</td></tr>
+<tr class="memdesc:a9fe191d5a9d832a9d5b88ebe2c7fde86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Отправка приватного сообщения пользователю.  <br /></td></tr>
+<tr class="separator:a9fe191d5a9d832a9d5b88ebe2c7fde86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcbbbc80001065310d2cd6221c5be55c" id="r_afcbbbc80001065310d2cd6221c5be55c"><td class="memItemLeft" align="right" valign="top"><a id="afcbbbc80001065310d2cd6221c5be55c" name="afcbbbc80001065310d2cd6221c5be55c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>on_exitButton_clicked</b> ()</td></tr>
+<tr class="memdesc:afcbbbc80001065310d2cd6221c5be55c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработчик нажатия кнопки "Exit". <br /></td></tr>
+<tr class="separator:afcbbbc80001065310d2cd6221c5be55c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ddc533eadf5adcefd407c10f9360865" id="r_a8ddc533eadf5adcefd407c10f9360865"><td class="memItemLeft" align="right" valign="top"><a id="a8ddc533eadf5adcefd407c10f9360865" name="a8ddc533eadf5adcefd407c10f9360865"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>on_sendButton_clicked</b> ()</td></tr>
+<tr class="memdesc:a8ddc533eadf5adcefd407c10f9360865"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработчик нажатия кнопки "Send". <br /></td></tr>
+<tr class="separator:a8ddc533eadf5adcefd407c10f9360865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Закрытые члены</h2></td></tr>
+<tr class="memitem:a086f67d9b878761ae8ca1783a159298d" id="r_a086f67d9b878761ae8ca1783a159298d"><td class="memItemLeft" align="right" valign="top"><a id="a086f67d9b878761ae8ca1783a159298d" name="a086f67d9b878761ae8ca1783a159298d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>authorizeUser</b> ()</td></tr>
+<tr class="memdesc:a086f67d9b878761ae8ca1783a159298d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Авторизация пользователя. <br /></td></tr>
+<tr class="separator:a086f67d9b878761ae8ca1783a159298d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfedef9edae209df536e8c1c7cf0e7ae" id="r_abfedef9edae209df536e8c1c7cf0e7ae"><td class="memItemLeft" align="right" valign="top"><a id="abfedef9edae209df536e8c1c7cf0e7ae" name="abfedef9edae209df536e8c1c7cf0e7ae"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>connectToServer</b> ()</td></tr>
+<tr class="memdesc:abfedef9edae209df536e8c1c7cf0e7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Подключение к серверу. <br /></td></tr>
+<tr class="separator:abfedef9edae209df536e8c1c7cf0e7ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada0b5cbe684bb08f01218d855be1ba0e" id="r_ada0b5cbe684bb08f01218d855be1ba0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada0b5cbe684bb08f01218d855be1ba0e">SendToServer</a> (const QString &amp;command, const QString &amp;data)</td></tr>
+<tr class="memdesc:ada0b5cbe684bb08f01218d855be1ba0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Отправка данных на сервер.  <br /></td></tr>
+<tr class="separator:ada0b5cbe684bb08f01218d855be1ba0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7a817b5b2cf4c12c85b77fcf7099508" id="r_ab7a817b5b2cf4c12c85b77fcf7099508"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7a817b5b2cf4c12c85b77fcf7099508">processResponse</a> (const QString &amp;command, const QString &amp;data)</td></tr>
+<tr class="memdesc:ab7a817b5b2cf4c12c85b77fcf7099508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработка ответа от сервера.  <br /></td></tr>
+<tr class="separator:ab7a817b5b2cf4c12c85b77fcf7099508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac38b0716f33becae9c20544edd9b02c7" id="r_ac38b0716f33becae9c20544edd9b02c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac38b0716f33becae9c20544edd9b02c7">updateOnlineUsers</a> (const QStringList &amp;userList)</td></tr>
+<tr class="memdesc:ac38b0716f33becae9c20544edd9b02c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обновление списка пользователей в интерфейсе.  <br /></td></tr>
+<tr class="separator:ac38b0716f33becae9c20544edd9b02c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dccaf492ad5ec23bbf69be6554bb3e5" id="r_a1dccaf492ad5ec23bbf69be6554bb3e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1dccaf492ad5ec23bbf69be6554bb3e5">handleError</a> (QAbstractSocket::SocketError socketError)</td></tr>
+<tr class="memdesc:a1dccaf492ad5ec23bbf69be6554bb3e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработка ошибок сокета.  <br /></td></tr>
+<tr class="separator:a1dccaf492ad5ec23bbf69be6554bb3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95c5779447a66e87120526d332aaef1f" id="r_a95c5779447a66e87120526d332aaef1f"><td class="memItemLeft" align="right" valign="top"><a id="a95c5779447a66e87120526d332aaef1f" name="a95c5779447a66e87120526d332aaef1f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>onConnected</b> ()</td></tr>
+<tr class="memdesc:a95c5779447a66e87120526d332aaef1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработчик события успешного подключения к серверу. <br /></td></tr>
+<tr class="separator:a95c5779447a66e87120526d332aaef1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfbd566c48180d394f2973edde0b9ddc" id="r_adfbd566c48180d394f2973edde0b9ddc"><td class="memItemLeft" align="right" valign="top"><a id="adfbd566c48180d394f2973edde0b9ddc" name="adfbd566c48180d394f2973edde0b9ddc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>handleDisconnection</b> ()</td></tr>
+<tr class="memdesc:adfbd566c48180d394f2973edde0b9ddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработчик отключения от сервера. <br /></td></tr>
+<tr class="separator:adfbd566c48180d394f2973edde0b9ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6f80e2defaa431435321ca3632f5196" id="r_ac6f80e2defaa431435321ca3632f5196"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6f80e2defaa431435321ca3632f5196">removeChatWindow</a> (const QString &amp;userName)</td></tr>
+<tr class="memdesc:ac6f80e2defaa431435321ca3632f5196"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаление окна чата  <br /></td></tr>
+<tr class="separator:ac6f80e2defaa431435321ca3632f5196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae53a95c2756fd716e78aafd170f8b01a" id="r_ae53a95c2756fd716e78aafd170f8b01a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae53a95c2756fd716e78aafd170f8b01a">openChatWindow</a> (QString username)</td></tr>
+<tr class="memdesc:ae53a95c2756fd716e78aafd170f8b01a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Открытие окна чата с пользователем.  <br /></td></tr>
+<tr class="separator:ae53a95c2756fd716e78aafd170f8b01a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee0f6495f4eb6f39112ab13d46314859" id="r_aee0f6495f4eb6f39112ab13d46314859"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee0f6495f4eb6f39112ab13d46314859">chatClicked</a> (QListWidgetItem *item)</td></tr>
+<tr class="memdesc:aee0f6495f4eb6f39112ab13d46314859"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обработчик клика по элементу списка пользователей.  <br /></td></tr>
+<tr class="separator:aee0f6495f4eb6f39112ab13d46314859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Закрытые данные</h2></td></tr>
+<tr class="memitem:a35466a70ed47252a0191168126a352a5" id="r_a35466a70ed47252a0191168126a352a5"><td class="memItemLeft" align="right" valign="top"><a id="a35466a70ed47252a0191168126a352a5" name="a35466a70ed47252a0191168126a352a5"></a>
+Ui::MainWindow *&#160;</td><td class="memItemRight" valign="bottom"><b>ui</b></td></tr>
+<tr class="separator:a35466a70ed47252a0191168126a352a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cc248bebbd4c0c4b988b2691fc3d0ff" id="r_a9cc248bebbd4c0c4b988b2691fc3d0ff"><td class="memItemLeft" align="right" valign="top"><a id="a9cc248bebbd4c0c4b988b2691fc3d0ff" name="a9cc248bebbd4c0c4b988b2691fc3d0ff"></a>
+<a class="el" href="classauth__window.html">auth_window</a>&#160;</td><td class="memItemRight" valign="bottom"><b>auth</b></td></tr>
+<tr class="separator:a9cc248bebbd4c0c4b988b2691fc3d0ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ab8bc9e88955c633ea7e25f011102cf" id="r_a5ab8bc9e88955c633ea7e25f011102cf"><td class="memItemLeft" align="right" valign="top"><a id="a5ab8bc9e88955c633ea7e25f011102cf" name="a5ab8bc9e88955c633ea7e25f011102cf"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>username</b></td></tr>
+<tr class="separator:a5ab8bc9e88955c633ea7e25f011102cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25493964c8f550b2380a12616fbc8250" id="r_a25493964c8f550b2380a12616fbc8250"><td class="memItemLeft" align="right" valign="top"><a id="a25493964c8f550b2380a12616fbc8250" name="a25493964c8f550b2380a12616fbc8250"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>password</b></td></tr>
+<tr class="separator:a25493964c8f550b2380a12616fbc8250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85cfe62c116f8d2f2021e5411b0356e" id="r_af85cfe62c116f8d2f2021e5411b0356e"><td class="memItemLeft" align="right" valign="top"><a id="af85cfe62c116f8d2f2021e5411b0356e" name="af85cfe62c116f8d2f2021e5411b0356e"></a>
+QTcpSocket *&#160;</td><td class="memItemRight" valign="bottom"><b>socket</b></td></tr>
+<tr class="separator:af85cfe62c116f8d2f2021e5411b0356e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03b15218fcf23b115eaccba0e62c53a1" id="r_a03b15218fcf23b115eaccba0e62c53a1"><td class="memItemLeft" align="right" valign="top"><a id="a03b15218fcf23b115eaccba0e62c53a1" name="a03b15218fcf23b115eaccba0e62c53a1"></a>
+QByteArray&#160;</td><td class="memItemRight" valign="bottom"><b>Data</b></td></tr>
+<tr class="separator:a03b15218fcf23b115eaccba0e62c53a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4280d39e0ce47bca6906f655cb524946" id="r_a4280d39e0ce47bca6906f655cb524946"><td class="memItemLeft" align="right" valign="top"><a id="a4280d39e0ce47bca6906f655cb524946" name="a4280d39e0ce47bca6906f655cb524946"></a>
+quint16&#160;</td><td class="memItemRight" valign="bottom"><b>nextBlockSize</b></td></tr>
+<tr class="separator:a4280d39e0ce47bca6906f655cb524946"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a121a10ea0f166c7faa8bf0507195ffe3" id="r_a121a10ea0f166c7faa8bf0507195ffe3"><td class="memItemLeft" align="right" valign="top"><a id="a121a10ea0f166c7faa8bf0507195ffe3" name="a121a10ea0f166c7faa8bf0507195ffe3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isConnected</b></td></tr>
+<tr class="separator:a121a10ea0f166c7faa8bf0507195ffe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d581f907095d9356d61aac5c01482f" id="r_a03d581f907095d9356d61aac5c01482f"><td class="memItemLeft" align="right" valign="top"><a id="a03d581f907095d9356d61aac5c01482f" name="a03d581f907095d9356d61aac5c01482f"></a>
+QMap&lt; QString, <a class="el" href="classPrivateChatWindow.html">PrivateChatWindow</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>chatWindows</b></td></tr>
+<tr class="separator:a03d581f907095d9356d61aac5c01482f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a996c5a2b6f77944776856f08ec30858d" name="a996c5a2b6f77944776856f08ec30858d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a996c5a2b6f77944776856f08ec30858d">&#9670;&#160;</a></span>MainWindow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MainWindow::MainWindow </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *</td>          <td class="paramname"><span class="paramname"><em>parent</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструктор главного окна. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>Указатель на родительский виджет. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="aee0f6495f4eb6f39112ab13d46314859" name="aee0f6495f4eb6f39112ab13d46314859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee0f6495f4eb6f39112ab13d46314859">&#9670;&#160;</a></span>chatClicked()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::chatClicked </td>
+          <td>(</td>
+          <td class="paramtype">QListWidgetItem *</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Обработчик клика по элементу списка пользователей. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td>Элемент списка. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1dccaf492ad5ec23bbf69be6554bb3e5" name="a1dccaf492ad5ec23bbf69be6554bb3e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dccaf492ad5ec23bbf69be6554bb3e5">&#9670;&#160;</a></span>handleError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::handleError </td>
+          <td>(</td>
+          <td class="paramtype">QAbstractSocket::SocketError</td>          <td class="paramname"><span class="paramname"><em>socketError</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Обработка ошибок сокета. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">socketError</td><td>Код ошибки сокета. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9fe191d5a9d832a9d5b88ebe2c7fde86" name="a9fe191d5a9d832a9d5b88ebe2c7fde86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fe191d5a9d832a9d5b88ebe2c7fde86">&#9670;&#160;</a></span>handlePrivateMessage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::handlePrivateMessage </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>toUser</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Отправка приватного сообщения пользователю. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">toUser</td><td>Имя пользователя-получателя. </td></tr>
+    <tr><td class="paramname">message</td><td>Сообщение. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae53a95c2756fd716e78aafd170f8b01a" name="ae53a95c2756fd716e78aafd170f8b01a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae53a95c2756fd716e78aafd170f8b01a">&#9670;&#160;</a></span>openChatWindow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::openChatWindow </td>
+          <td>(</td>
+          <td class="paramtype">QString</td>          <td class="paramname"><span class="paramname"><em>userName</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Открытие окна чата с пользователем. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">userName</td><td>Имя пользователя. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab7a817b5b2cf4c12c85b77fcf7099508" name="ab7a817b5b2cf4c12c85b77fcf7099508"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7a817b5b2cf4c12c85b77fcf7099508">&#9670;&#160;</a></span>processResponse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::processResponse </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>command</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Обработка ответа от сервера. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>Команда. </td></tr>
+    <tr><td class="paramname">data</td><td>Данные. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac6f80e2defaa431435321ca3632f5196" name="ac6f80e2defaa431435321ca3632f5196"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6f80e2defaa431435321ca3632f5196">&#9670;&#160;</a></span>removeChatWindow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::removeChatWindow </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>userName</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Удаление окна чата </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">userName</td><td>Имя пользователя (собеседника) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ada0b5cbe684bb08f01218d855be1ba0e" name="ada0b5cbe684bb08f01218d855be1ba0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada0b5cbe684bb08f01218d855be1ba0e">&#9670;&#160;</a></span>SendToServer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::SendToServer </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>command</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Отправка данных на сервер. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>Команда. </td></tr>
+    <tr><td class="paramname">data</td><td>Данные. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac38b0716f33becae9c20544edd9b02c7" name="ac38b0716f33becae9c20544edd9b02c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac38b0716f33becae9c20544edd9b02c7">&#9670;&#160;</a></span>updateOnlineUsers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::updateOnlineUsers </td>
+          <td>(</td>
+          <td class="paramtype">const QStringList &amp;</td>          <td class="paramname"><span class="paramname"><em>userList</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Обновление списка пользователей в интерфейсе. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">userList</td><td>Список пользователей. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li><a class="el" href="mainwindow_8h_source.html">mainwindow.h</a></li>
+<li><b>mainwindow.cpp</b></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

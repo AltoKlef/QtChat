@@ -1,0 +1,109 @@
+\doxysection{Класс Private\+Chat\+Window}
+\hypertarget{classPrivateChatWindow}{}\label{classPrivateChatWindow}\index{PrivateChatWindow@{PrivateChatWindow}}
+Граф наследования\+:Private\+Chat\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPrivateChatWindow}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Сигналы}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classPrivateChatWindow_a79a9f3bc744a300dea2e63c35a84b9a2}\label{classPrivateChatWindow_a79a9f3bc744a300dea2e63c35a84b9a2} 
+void {\bfseries send\+Message} (const QString \&to\+User, const QString \&message)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPrivateChatWindow_a2bca67e807d8600a8c754fb4ede256e0}{Private\+Chat\+Window}} (const QString \&user\+Name, QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Конструктор класса \doxylink{classPrivateChatWindow}{Private\+Chat\+Window}. Инициализирует окно приватного чата с указанным пользователем. \end{DoxyCompactList}\item 
+\Hypertarget{classPrivateChatWindow_a136e5469bdf71db206d372cd47898d6c}\label{classPrivateChatWindow_a136e5469bdf71db206d372cd47898d6c} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Private\+Chat\+Window} ()
+\begin{DoxyCompactList}\small\item\em Деструктор класса \doxylink{classPrivateChatWindow}{Private\+Chat\+Window}. Освобождает ресурсы, связанные с окном приватного чата. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPrivateChatWindow_a5ee7ab6f845e7b180e084b69eb58f838}{append\+Message}} (const QString \&message)
+\begin{DoxyCompactList}\small\item\em Добавляет сообщение в окно чата. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPrivateChatWindow_a55cfa18fc77d1416bd785dc0889ba3c4}{close\+Event}} (QClose\+Event \texorpdfstring{$\ast$}{*}event)
+\begin{DoxyCompactList}\small\item\em Обрабатывает событие закрытия окна. Вызывает \doxylink{classPrivateChatWindow_af1132dd70d54e0e43ad125399eca725f}{on\+Window\+Closed()} и завершает работу диалогового окна. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Закрытые слоты}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classPrivateChatWindow_af7ca64b2d5c9bf9cea066b44ef88cfdf}\label{classPrivateChatWindow_af7ca64b2d5c9bf9cea066b44ef88cfdf} 
+void {\bfseries on\+\_\+send\+Button\+\_\+clicked} ()
+\begin{DoxyCompactList}\small\item\em Слот для обработки нажатия кнопки отправки сообщения. Отправляет сообщение пользователю, если строка сообщения не пуста. \end{DoxyCompactList}\item 
+\Hypertarget{classPrivateChatWindow_a9da18dfc39ed388a1361bd5020611e5c}\label{classPrivateChatWindow_a9da18dfc39ed388a1361bd5020611e5c} 
+void {\bfseries on\+\_\+exit\+Button\+\_\+clicked} ()
+\begin{DoxyCompactList}\small\item\em Слот для обработки нажатия кнопки выхода из чата. Закрывает окно приватного чата. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classPrivateChatWindow_af1132dd70d54e0e43ad125399eca725f}\label{classPrivateChatWindow_af1132dd70d54e0e43ad125399eca725f} 
+void {\bfseries on\+Window\+Closed} ()
+\begin{DoxyCompactList}\small\item\em Обрабатывает закрытие окна. Отправляет сообщение о закрытии чата и завершает работу диалогового окна. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Закрытые данные}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classPrivateChatWindow_afde66760320eaadfd77608a578c4437d}\label{classPrivateChatWindow_afde66760320eaadfd77608a578c4437d} 
+Ui\+::\+Private\+Chat\+Window \texorpdfstring{$\ast$}{*} {\bfseries ui}
+\item 
+\Hypertarget{classPrivateChatWindow_ad2264a3c9a673ae8863848f94d266360}\label{classPrivateChatWindow_ad2264a3c9a673ae8863848f94d266360} 
+QString {\bfseries user\+Name}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{classPrivateChatWindow_a2bca67e807d8600a8c754fb4ede256e0}\index{PrivateChatWindow@{PrivateChatWindow}!PrivateChatWindow@{PrivateChatWindow}}
+\index{PrivateChatWindow@{PrivateChatWindow}!PrivateChatWindow@{PrivateChatWindow}}
+\doxysubsubsection{\texorpdfstring{PrivateChatWindow()}{PrivateChatWindow()}}
+{\footnotesize\ttfamily \label{classPrivateChatWindow_a2bca67e807d8600a8c754fb4ede256e0} 
+Private\+Chat\+Window\+::\+Private\+Chat\+Window (\begin{DoxyParamCaption}\item[{const QString \&}]{username}{, }\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Конструктор класса \doxylink{classPrivateChatWindow}{Private\+Chat\+Window}. Инициализирует окно приватного чата с указанным пользователем. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em username} & Имя пользователя, с которым ведется приватный чат. \\
+\hline
+{\em parent} & Родительский виджет. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{classPrivateChatWindow_a5ee7ab6f845e7b180e084b69eb58f838}\index{PrivateChatWindow@{PrivateChatWindow}!appendMessage@{appendMessage}}
+\index{appendMessage@{appendMessage}!PrivateChatWindow@{PrivateChatWindow}}
+\doxysubsubsection{\texorpdfstring{appendMessage()}{appendMessage()}}
+{\footnotesize\ttfamily \label{classPrivateChatWindow_a5ee7ab6f845e7b180e084b69eb58f838} 
+void Private\+Chat\+Window\+::append\+Message (\begin{DoxyParamCaption}\item[{const QString \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Добавляет сообщение в окно чата. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em message} & Сообщение для добавления в чат. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classPrivateChatWindow_a55cfa18fc77d1416bd785dc0889ba3c4}\index{PrivateChatWindow@{PrivateChatWindow}!closeEvent@{closeEvent}}
+\index{closeEvent@{closeEvent}!PrivateChatWindow@{PrivateChatWindow}}
+\doxysubsubsection{\texorpdfstring{closeEvent()}{closeEvent()}}
+{\footnotesize\ttfamily \label{classPrivateChatWindow_a55cfa18fc77d1416bd785dc0889ba3c4} 
+void Private\+Chat\+Window\+::close\+Event (\begin{DoxyParamCaption}\item[{QClose\+Event \texorpdfstring{$\ast$}{*}}]{event}{}\end{DoxyParamCaption})}
+
+
+
+Обрабатывает событие закрытия окна. Вызывает \doxylink{classPrivateChatWindow_af1132dd70d54e0e43ad125399eca725f}{on\+Window\+Closed()} и завершает работу диалогового окна. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em event} & Событие закрытия окна. \\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+privatechatwindow.\+h\item 
+\mbox{\hyperlink{privatechatwindow_8cpp}{privatechatwindow.\+cpp}}\end{DoxyCompactItemize}

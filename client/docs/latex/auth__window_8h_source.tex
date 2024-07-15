@@ -1,0 +1,38 @@
+\doxysection{auth\+\_\+window.\+h}
+\hypertarget{auth__window_8h_source}{}\label{auth__window_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ AUTH\_WINDOW\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ AUTH\_WINDOW\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QDialog>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QMessageBox>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}filter.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }Ui\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classauth__window}{auth\_window}};}
+\DoxyCodeLine{00009\ \}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classauth__window}{auth\_window}}\ :\ \textcolor{keyword}{public}\ QDialog}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classauth__window_ad4dd2d7d2ea3bf2fe261a272c22db9e7}{auth\_window}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classauth__window_aac607603f0e29c6d538876c915e31584}{\string~auth\_window}}();}
+\DoxyCodeLine{00018\ \ \ \ \ QString\ \mbox{\hyperlink{classauth__window_a8554ab4b5bfb99a491d00ddcaec6ce78}{getLogin}}();}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classauth__window_a0880e8151697e3f69879cebe31664983}{wrongLogin}}();}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//String\ getPass();}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classauth__window_ab45702c904bdb3338f2dc9c333d0748a}{on\_authButton\_clicked}}();}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classauth__window_aa1e3e3f1d51a6e64d4f443bea63bddda}{on\_logLineEdit\_returnPressed}}();}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classauth__window_a3604baff8d4cfc6b0b836a8b1bc423ef}{on\_logLineEdit\_textEdited}}(\textcolor{keyword}{const}\ QString\ \&arg1);}
+\DoxyCodeLine{00025\ signals:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ authClicked();}
+\DoxyCodeLine{00027\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00028\ \ \ \ \ QString\ login;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//QString\ password;}}
+\DoxyCodeLine{00030\ \ \ \ \ Ui::auth\_window\ *ui;}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ AUTH\_WINDOW\_H}}
+
+\end{DoxyCode}

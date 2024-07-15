@@ -1,0 +1,120 @@
+\doxysection{Класс auth\+\_\+window}
+\hypertarget{classauth__window}{}\label{classauth__window}\index{auth\_window@{auth\_window}}
+Граф наследования\+:auth\+\_\+window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classauth__window}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Сигналы}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classauth__window_aae990a22d49055a6cb2bd029c2429600}\label{classauth__window_aae990a22d49055a6cb2bd029c2429600} 
+void {\bfseries auth\+Clicked} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classauth__window_ad4dd2d7d2ea3bf2fe261a272c22db9e7}{auth\+\_\+window}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Конструктор класса \doxylink{classauth__window}{auth\+\_\+window}. \end{DoxyCompactList}\item 
+\Hypertarget{classauth__window_aac607603f0e29c6d538876c915e31584}\label{classauth__window_aac607603f0e29c6d538876c915e31584} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}auth\+\_\+window} ()
+\begin{DoxyCompactList}\small\item\em Деструктор класса \doxylink{classauth__window}{auth\+\_\+window}. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classauth__window_a8554ab4b5bfb99a491d00ddcaec6ce78}{get\+Login}} ()
+\begin{DoxyCompactList}\small\item\em Получить логин пользователя. \end{DoxyCompactList}\item 
+\Hypertarget{classauth__window_a0880e8151697e3f69879cebe31664983}\label{classauth__window_a0880e8151697e3f69879cebe31664983} 
+void {\bfseries wrong\+Login} ()
+\begin{DoxyCompactList}\small\item\em Отобразить сообщение об ошибке, если пользователь уже авторизован. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Закрытые слоты}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classauth__window_ab45702c904bdb3338f2dc9c333d0748a}{on\+\_\+auth\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Обработчик нажатия кнопки авторизации. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classauth__window_aa1e3e3f1d51a6e64d4f443bea63bddda}{on\+\_\+log\+Line\+Edit\+\_\+return\+Pressed}} ()
+\begin{DoxyCompactList}\small\item\em Обработчик нажатия клавиши Enter в поле логина. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classauth__window_a3604baff8d4cfc6b0b836a8b1bc423ef}{on\+\_\+log\+Line\+Edit\+\_\+text\+Edited}} (const QString \&arg1)
+\begin{DoxyCompactList}\small\item\em Обработчик изменения текста в поле логина. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Закрытые данные}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classauth__window_afc727a7c86d75944c7eb432753c1c291}\label{classauth__window_afc727a7c86d75944c7eb432753c1c291} 
+QString {\bfseries login}
+\item 
+\Hypertarget{classauth__window_afc262ee1b02de46b1055fb4ff71a15a5}\label{classauth__window_afc262ee1b02de46b1055fb4ff71a15a5} 
+Ui\+::auth\+\_\+window \texorpdfstring{$\ast$}{*} {\bfseries ui}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{classauth__window_ad4dd2d7d2ea3bf2fe261a272c22db9e7}\index{auth\_window@{auth\_window}!auth\_window@{auth\_window}}
+\index{auth\_window@{auth\_window}!auth\_window@{auth\_window}}
+\doxysubsubsection{\texorpdfstring{auth\_window()}{auth\_window()}}
+{\footnotesize\ttfamily \label{classauth__window_ad4dd2d7d2ea3bf2fe261a272c22db9e7} 
+auth\+\_\+window\+::auth\+\_\+window (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Конструктор класса \doxylink{classauth__window}{auth\+\_\+window}. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em parent} & Указатель на родительский объект. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{classauth__window_a8554ab4b5bfb99a491d00ddcaec6ce78}\index{auth\_window@{auth\_window}!getLogin@{getLogin}}
+\index{getLogin@{getLogin}!auth\_window@{auth\_window}}
+\doxysubsubsection{\texorpdfstring{getLogin()}{getLogin()}}
+{\footnotesize\ttfamily \label{classauth__window_a8554ab4b5bfb99a491d00ddcaec6ce78} 
+QString auth\+\_\+window\+::get\+Login (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Получить логин пользователя. 
+
+\begin{DoxyReturn}{Возвращает}
+QString Логин пользователя. 
+\end{DoxyReturn}
+\Hypertarget{classauth__window_ab45702c904bdb3338f2dc9c333d0748a}\index{auth\_window@{auth\_window}!on\_authButton\_clicked@{on\_authButton\_clicked}}
+\index{on\_authButton\_clicked@{on\_authButton\_clicked}!auth\_window@{auth\_window}}
+\doxysubsubsection{\texorpdfstring{on\_authButton\_clicked}{on\_authButton\_clicked}}
+{\footnotesize\ttfamily \label{classauth__window_ab45702c904bdb3338f2dc9c333d0748a} 
+void auth\+\_\+window\+::on\+\_\+auth\+Button\+\_\+clicked (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Обработчик нажатия кнопки авторизации. 
+
+Этот метод испускает сигнал auth\+Clicked, чтобы начать процесс авторизации. \Hypertarget{classauth__window_aa1e3e3f1d51a6e64d4f443bea63bddda}\index{auth\_window@{auth\_window}!on\_logLineEdit\_returnPressed@{on\_logLineEdit\_returnPressed}}
+\index{on\_logLineEdit\_returnPressed@{on\_logLineEdit\_returnPressed}!auth\_window@{auth\_window}}
+\doxysubsubsection{\texorpdfstring{on\_logLineEdit\_returnPressed}{on\_logLineEdit\_returnPressed}}
+{\footnotesize\ttfamily \label{classauth__window_aa1e3e3f1d51a6e64d4f443bea63bddda} 
+void auth\+\_\+window\+::on\+\_\+log\+Line\+Edit\+\_\+return\+Pressed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Обработчик нажатия клавиши Enter в поле логина. 
+
+Этот метод испускает сигнал auth\+Clicked, чтобы начать процесс авторизации. \Hypertarget{classauth__window_a3604baff8d4cfc6b0b836a8b1bc423ef}\index{auth\_window@{auth\_window}!on\_logLineEdit\_textEdited@{on\_logLineEdit\_textEdited}}
+\index{on\_logLineEdit\_textEdited@{on\_logLineEdit\_textEdited}!auth\_window@{auth\_window}}
+\doxysubsubsection{\texorpdfstring{on\_logLineEdit\_textEdited}{on\_logLineEdit\_textEdited}}
+{\footnotesize\ttfamily \label{classauth__window_a3604baff8d4cfc6b0b836a8b1bc423ef} 
+void auth\+\_\+window\+::on\+\_\+log\+Line\+Edit\+\_\+text\+Edited (\begin{DoxyParamCaption}\item[{const QString \&}]{arg1}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Обработчик изменения текста в поле логина. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em arg1} & Новый текст, введенный пользователем. \\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+auth\+\_\+window.\+h\item 
+auth\+\_\+window.\+cpp\end{DoxyCompactItemize}

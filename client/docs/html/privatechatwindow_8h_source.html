@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.11.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>client: Исходный файл privatechatwindow.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">client
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="doc-content">
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">privatechatwindow.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef PRIVATECHATWINDOW_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define PRIVATECHATWINDOW_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;QDialog&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span>Ui {</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span><a class="code hl_class" href="classPrivateChatWindow.html">PrivateChatWindow</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>}</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="};">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classPrivateChatWindow.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classPrivateChatWindow.html">PrivateChatWindow</a> : <span class="keyword">public</span> QDialog</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    Q_OBJECT</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classPrivateChatWindow.html#a2bca67e807d8600a8c754fb4ede256e0">PrivateChatWindow</a>(<span class="keyword">const</span> QString &amp;userName, QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_function" href="classPrivateChatWindow.html#a136e5469bdf71db206d372cd47898d6c">~PrivateChatWindow</a>();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPrivateChatWindow.html#a5ee7ab6f845e7b180e084b69eb58f838">appendMessage</a>(<span class="keyword">const</span> QString &amp;message);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPrivateChatWindow.html#a55cfa18fc77d1416bd785dc0889ba3c4">closeEvent</a>(QCloseEvent *event);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>signals:</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">void</span> sendMessage(<span class="keyword">const</span> QString &amp;toUser, <span class="keyword">const</span> QString &amp;message);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">private</span> slots:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> <a class="code hl_slot" href="classPrivateChatWindow.html#af7ca64b2d5c9bf9cea066b44ef88cfdf">on_sendButton_clicked</a>();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">void</span> <a class="code hl_slot" href="classPrivateChatWindow.html#a9da18dfc39ed388a1361bd5020611e5c">on_exitButton_clicked</a>();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    Ui::PrivateChatWindow *ui;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    QString userName;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPrivateChatWindow.html#af1132dd70d54e0e43ad125399eca725f">onWindowClosed</a>();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif </span><span class="comment">// PRIVATECHATWINDOW_H</span></div>
+<div class="ttc" id="aclassPrivateChatWindow_html"><div class="ttname"><a href="classPrivateChatWindow.html">PrivateChatWindow</a></div><div class="ttdef"><b>Definition</b> privatechatwindow.h:11</div></div>
+<div class="ttc" id="aclassPrivateChatWindow_html_a136e5469bdf71db206d372cd47898d6c"><div class="ttname"><a href="classPrivateChatWindow.html#a136e5469bdf71db206d372cd47898d6c">PrivateChatWindow::~PrivateChatWindow</a></div><div class="ttdeci">~PrivateChatWindow()</div><div class="ttdoc">Деструктор класса PrivateChatWindow. Освобождает ресурсы, связанные с окном приватного чата.</div><div class="ttdef"><b>Definition</b> privatechatwindow.cpp:33</div></div>
+<div class="ttc" id="aclassPrivateChatWindow_html_a2bca67e807d8600a8c754fb4ede256e0"><div class="ttname"><a href="classPrivateChatWindow.html#a2bca67e807d8600a8c754fb4ede256e0">PrivateChatWindow::PrivateChatWindow</a></div><div class="ttdeci">PrivateChatWindow(const QString &amp;userName, QWidget *parent=nullptr)</div><div class="ttdoc">Конструктор класса PrivateChatWindow. Инициализирует окно приватного чата с указанным пользователем.</div><div class="ttdef"><b>Definition</b> privatechatwindow.cpp:18</div></div>
+<div class="ttc" id="aclassPrivateChatWindow_html_a55cfa18fc77d1416bd785dc0889ba3c4"><div class="ttname"><a href="classPrivateChatWindow.html#a55cfa18fc77d1416bd785dc0889ba3c4">PrivateChatWindow::closeEvent</a></div><div class="ttdeci">void closeEvent(QCloseEvent *event)</div><div class="ttdoc">Обрабатывает событие закрытия окна. Вызывает onWindowClosed() и завершает работу диалогового окна.</div><div class="ttdef"><b>Definition</b> privatechatwindow.cpp:75</div></div>
+<div class="ttc" id="aclassPrivateChatWindow_html_a5ee7ab6f845e7b180e084b69eb58f838"><div class="ttname"><a href="classPrivateChatWindow.html#a5ee7ab6f845e7b180e084b69eb58f838">PrivateChatWindow::appendMessage</a></div><div class="ttdeci">void appendMessage(const QString &amp;message)</div><div class="ttdoc">Добавляет сообщение в окно чата.</div><div class="ttdef"><b>Definition</b> privatechatwindow.cpp:56</div></div>
+<div class="ttc" id="aclassPrivateChatWindow_html_a9da18dfc39ed388a1361bd5020611e5c"><div class="ttname"><a href="classPrivateChatWindow.html#a9da18dfc39ed388a1361bd5020611e5c">PrivateChatWindow::on_exitButton_clicked</a></div><div class="ttdeci">void on_exitButton_clicked()</div><div class="ttdoc">Слот для обработки нажатия кнопки выхода из чата. Закрывает окно приватного чата.</div><div class="ttdef"><b>Definition</b> privatechatwindow.cpp:85</div></div>
+<div class="ttc" id="aclassPrivateChatWindow_html_af1132dd70d54e0e43ad125399eca725f"><div class="ttname"><a href="classPrivateChatWindow.html#af1132dd70d54e0e43ad125399eca725f">PrivateChatWindow::onWindowClosed</a></div><div class="ttdeci">void onWindowClosed()</div><div class="ttdoc">Обрабатывает закрытие окна. Отправляет сообщение о закрытии чата и завершает работу диалогового окна.</div><div class="ttdef"><b>Definition</b> privatechatwindow.cpp:65</div></div>
+<div class="ttc" id="aclassPrivateChatWindow_html_af7ca64b2d5c9bf9cea066b44ef88cfdf"><div class="ttname"><a href="classPrivateChatWindow.html#af7ca64b2d5c9bf9cea066b44ef88cfdf">PrivateChatWindow::on_sendButton_clicked</a></div><div class="ttdeci">void on_sendButton_clicked()</div><div class="ttdoc">Слот для обработки нажатия кнопки отправки сообщения. Отправляет сообщение пользователю,...</div><div class="ttdef"><b>Definition</b> privatechatwindow.cpp:42</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

@@ -1,0 +1,65 @@
+\doxysection{Класс No\+Tilde\+Filter}
+\hypertarget{classNoTildeFilter}{}\label{classNoTildeFilter}\index{NoTildeFilter@{NoTildeFilter}}
+Граф наследования\+:No\+Tilde\+Filter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classNoTildeFilter}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classNoTildeFilter_a4e2cc9354751f3cb3d47cc2dac39c82a}{No\+Tilde\+Filter}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Конструктор класса \doxylink{classNoTildeFilter}{No\+Tilde\+Filter}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Защищенные члены}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classNoTildeFilter_a3822873716c2c76ed0429fe123b70ab4}{event\+Filter}} (QObject \texorpdfstring{$\ast$}{*}obj, QEvent \texorpdfstring{$\ast$}{*}event) override
+\begin{DoxyCompactList}\small\item\em Этот метод перехватывает события клавиатуры и игнорирует ввод символа "{}\texorpdfstring{$\sim$}{\string~}"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{classNoTildeFilter_a4e2cc9354751f3cb3d47cc2dac39c82a}\index{NoTildeFilter@{NoTildeFilter}!NoTildeFilter@{NoTildeFilter}}
+\index{NoTildeFilter@{NoTildeFilter}!NoTildeFilter@{NoTildeFilter}}
+\doxysubsubsection{\texorpdfstring{NoTildeFilter()}{NoTildeFilter()}}
+{\footnotesize\ttfamily \label{classNoTildeFilter_a4e2cc9354751f3cb3d47cc2dac39c82a} 
+No\+Tilde\+Filter\+::\+No\+Tilde\+Filter (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Конструктор класса \doxylink{classNoTildeFilter}{No\+Tilde\+Filter}. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em parent} & Указатель на родительский объект. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{classNoTildeFilter_a3822873716c2c76ed0429fe123b70ab4}\index{NoTildeFilter@{NoTildeFilter}!eventFilter@{eventFilter}}
+\index{eventFilter@{eventFilter}!NoTildeFilter@{NoTildeFilter}}
+\doxysubsubsection{\texorpdfstring{eventFilter()}{eventFilter()}}
+{\footnotesize\ttfamily \label{classNoTildeFilter_a3822873716c2c76ed0429fe123b70ab4} 
+bool No\+Tilde\+Filter\+::event\+Filter (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{obj}{, }\item[{QEvent \texorpdfstring{$\ast$}{*}}]{event}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Этот метод перехватывает события клавиатуры и игнорирует ввод символа "{}\texorpdfstring{$\sim$}{\string~}"{}. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em obj} & Указатель на объект, для которого фильтруются события. \\
+\hline
+{\em event} & Указатель на событие, которое фильтруется. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Возвращает true, если событие было обработано (игнорируемо), и false, если событие должно быть передано дальше. 
+\end{DoxyReturn}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+filter.\+h\item 
+filter.\+cpp\end{DoxyCompactItemize}
