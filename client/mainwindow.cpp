@@ -1,6 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QSettings>
+
+/**
+ * @brief Конструктор главного окна.
+ * @param parent Указатель на родительский виджет.
+ */
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -8,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     socket = new QTcpSocket(this);
 
+    // Подключение сигналов и слотов
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::slotReadyRead);
     connect(socket, &QTcpSocket::disconnected, this, &MainWindow::handleDisconnection);
     connect(&auth, &auth_window::authClicked, this, &MainWindow::authorizeUser);
@@ -18,6 +24,10 @@ MainWindow::MainWindow(QWidget *parent)
     nextBlockSize = 0;
     isConnected = false;
 }
+
+/**
+ * @brief Деструктор главного окна.
+ */
 MainWindow::~MainWindow()
 {
     if (socket->state() == QAbstractSocket::ConnectedState) {
@@ -28,11 +38,9 @@ MainWindow::~MainWindow()
     qDeleteAll(chatWindows);
 }
 
-
-
-
-//связь с сервером
-
+/**
+ * @brief Авторизация пользователя.
+ */
 void MainWindow::authorizeUser()
 {
     qDebug() << auth.getLogin();
@@ -44,18 +52,24 @@ void MainWindow::authorizeUser()
     }
 }
 
-
-void MainWindow::connectToServer(){
+/**
+ * @brief Подключение к серверу.
+ */
+void MainWindow::connectToServer()
+{
     if (socket->state() == QAbstractSocket::UnconnectedState) {
         qDebug() << "Reconnecting";
         QSettings settings(":/con/config.ini", QSettings::IniFormat);
         QString ip = settings.value("Server/IP").toString();
         int port = settings.value("Server/Port").toInt();
-        qDebug()<<ip<<"   "<<port;
+        qDebug() << ip << " " << port;
         socket->connectToHost(ip, port);
     }
 }
 
+/**
+ * @brief Обработчик события успешного подключения к серверу.
+ */
 void MainWindow::onConnected()
 {
     isConnected = true;
@@ -63,7 +77,11 @@ void MainWindow::onConnected()
     SendToServer("AUTH", username);
 }
 
-void MainWindow::slotReadyRead() {
+/**
+ * @brief Обработчик готовности чтения данных из сокета.
+ */
+void MainWindow::slotReadyRead()
+{
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_5_15);
     QString command;
@@ -99,13 +117,24 @@ void MainWindow::slotReadyRead() {
         processResponse(command, data);
     }
 }
+
+/**
+ * @brief Отправка приватного сообщения пользователю.
+ * @param toUser Имя пользователя-получателя.
+ * @param message Сообщение.
+ */
 void MainWindow::handlePrivateMessage(const QString &toUser, const QString &message)
 {
-    SendToServer("PRIVATE_MESSAGE", toUser+"~"+message);
+    SendToServer("PRIVATE_MESSAGE", toUser + "~" + message);
 }
 
-
-void MainWindow::SendToServer(const QString &command, const QString &data) {
+/**
+ * @brief Отправка данных на сервер.
+ * @param command Команда.
+ * @param data Данные.
+ */
+void MainWindow::SendToServer(const QString &command, const QString &data)
+{
     QByteArray packet;
     QDataStream out(&packet, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_15);
@@ -115,12 +144,10 @@ void MainWindow::SendToServer(const QString &command, const QString &data) {
     socket->write(packet);
 }
 
-
-
-
-
-
-//обработка ошибок и команд сервера
+/**
+ * @brief Обработка ошибок сокета.
+ * @param socketError Код ошибки сокета.
+ */
 void MainWindow::handleError(QAbstractSocket::SocketError socketError)
 {
     QString errorMessage;
@@ -147,40 +174,47 @@ void MainWindow::handleError(QAbstractSocket::SocketError socketError)
     QMessageBox::critical(this, "Connection Error", errorMessage);
 }
 
-void MainWindow::handleDisconnection() {
+/**
+ * @brief Обработчик отключения от сервера.
+ */
+void MainWindow::handleDisconnection()
+{
     isConnected = false;
     qDebug() << "Disconnected from server";
     this->hide();
     auth.show();
 }
 
+/**
+ * @brief Обработка ответа от сервера.
+ * @param command Команда.
+ * @param data Данные.
+ */
 void MainWindow::processResponse(const QString &command, const QString &data)
 {
     if (command == "AUTH_SUCCESS") {
         auth.hide();
         MainWindow::show();
         ui->textBrowser->append(data);
-        qDebug() << "Autorised";
+        qDebug() << "Authorised";
     } else if (command == "AUTH_FAIL") {
-        qDebug() << "not authorised";
+        qDebug() << "Not authorised";
         auth.wrongLogin();
     } else if (command == "MESSAGE") {
         ui->textBrowser->append(data);
     } else if (command == "PRIVATE_MESSAGE") {
-        qDebug()<<"private";
+        qDebug() << "Private";
         QStringList parts = data.split("~");
         if (parts.size() == 3) {
             QString time = parts[0];
             QString fromUser = parts[1];
-            QString message=parts[2];
-            if(chatWindows.contains(fromUser)){
-                chatWindows[fromUser]->appendMessage("|"+time+ "|  "+fromUser +": " + message);
-            }
-            else{
+            QString message = parts[2];
+            if (chatWindows.contains(fromUser)) {
+                chatWindows[fromUser]->appendMessage("|" + time + "|  " + fromUser + ": " + message);
+            } else {
                 openChatWindow(fromUser);
-                chatWindows[fromUser]->appendMessage("|"+time+ "|  "+fromUser +": " + message);
+                chatWindows[fromUser]->appendMessage("|" + time + "|  " + fromUser + ": " + message);
             }
-
         }
     } else if (command == "UPDATE_USERS") {
         QStringList userList = data.split(',');
@@ -190,19 +224,26 @@ void MainWindow::processResponse(const QString &command, const QString &data)
     }
 }
 
-
-
-
-//интерфейс
+/**
+ * @brief Отображение окна авторизации.
+ */
 void MainWindow::display()
 {
     auth.show();
 }
 
-void MainWindow::chatClicked(QListWidgetItem *item){
+/**
+ * @brief Обработчик клика по элементу списка пользователей.
+ * @param item Элемент списка.
+ */
+void MainWindow::chatClicked(QListWidgetItem *item)
+{
     openChatWindow(item->text());
 }
 
+/**
+ * @brief Обработчик нажатия клавиши Enter в поле ввода сообщения.
+ */
 void MainWindow::on_lineEdit_returnPressed()
 {
     if (ui->lineEdit->text().isEmpty()) {
@@ -212,15 +253,27 @@ void MainWindow::on_lineEdit_returnPressed()
     ui->lineEdit->clear();
 }
 
-void MainWindow::updateOnlineUsers(const QStringList &userList) {
+/**
+ * @brief Обновление списка пользователей в интерфейсе.
+ * @param userList Список пользователей.
+ */
+void MainWindow::updateOnlineUsers(const QStringList &userList)
+{
     ui->userList->clear();
     ui->userList->addItems(userList);
 }
 
+/**
+ * @brief Обработчик нажатия кнопки "Online".
+ */
 void MainWindow::on_onlineButton_clicked()
 {
     SendToServer("ONLINE", username);
 }
+
+/**
+ * @brief Обработчик нажатия кнопки "Send".
+ */
 void MainWindow::on_sendButton_clicked()
 {
     if (ui->lineEdit->text().isEmpty()) {
@@ -229,6 +282,10 @@ void MainWindow::on_sendButton_clicked()
     SendToServer("MESSAGE", ui->lineEdit->text());
     ui->lineEdit->clear();
 }
+
+/**
+ * @brief Обработчик нажатия кнопки "Exit".
+ */
 void MainWindow::on_exitButton_clicked()
 {
     if (socket->state() == QAbstractSocket::ConnectedState) {
@@ -238,11 +295,10 @@ void MainWindow::on_exitButton_clicked()
     qApp->quit();
 }
 
-
-
-
-
-//окно личных сообщений
+/**
+ * @brief Открытие окна чата с пользователем.
+ * @param userName Имя пользователя.
+ */
 void MainWindow::openChatWindow(QString userName)
 {
     if (chatWindows.contains(userName)) {
@@ -250,14 +306,17 @@ void MainWindow::openChatWindow(QString userName)
         chatWindow->show();
         chatWindow->raise(); // Поднять окно на передний план
     } else {
-        qDebug()<<userName;
+        qDebug() << userName;
         PrivateChatWindow *chatWindow = new PrivateChatWindow(userName, this);
         chatWindows.insert(userName, chatWindow);
         connect(chatWindow, &PrivateChatWindow::sendMessage, this, &MainWindow::handlePrivateMessage);
         chatWindow->show();
     }
 }
-
+/**
+ * @brief Удаление окна чата
+ * @param userName Имя пользователя (собеседника)
+ */
 void MainWindow::removeChatWindow(const QString &userName)
 {
     if (chatWindows.contains(userName)) {
